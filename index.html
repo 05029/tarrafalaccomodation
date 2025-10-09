@@ -231,13 +231,20 @@
         .quarto-img {
             width: 100%;
             height: 200px;
-            background: var(--accent-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-weight: bold;
             position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .quarto-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .quarto-img:hover img {
+            transform: scale(1.05);
         }
 
         .quarto-status {
@@ -304,6 +311,100 @@
             transform: translateY(-2px);
         }
 
+        /* Modal de Galeria */
+        .galeria-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .galeria-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .galeria-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .close-galeria {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-galeria:hover {
+            background: #e6a400;
+        }
+
+        .galeria-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .galeria-nav:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .galeria-prev {
+            left: -60px;
+        }
+
+        .galeria-next {
+            right: -60px;
+        }
+
+        .galeria-counter {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            font-size: 1rem;
+            background: rgba(0,0,0,0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
         /* Modal de Reserva */
         .modal {
             display: none;
@@ -343,6 +444,16 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-color);
+        }
+
+        .whatsapp-info {
+            background: #25D366;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
         }
 
         /* Footer */
@@ -394,6 +505,17 @@
             }
         }
 
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .nav-menu {
@@ -432,6 +554,25 @@
                 margin: 2rem auto;
                 padding: 0 1rem;
             }
+
+            .galeria-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .galeria-prev {
+                left: 10px;
+            }
+
+            .galeria-next {
+                right: 10px;
+            }
+
+            .close-galeria {
+                top: 10px;
+                right: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -449,6 +590,10 @@
 
             .quarto-card {
                 margin: 0 0.5rem;
+            }
+
+            .galeria-content {
+                max-width: 95%;
             }
         }
     </style>
@@ -525,6 +670,17 @@
         </div>
     </section>
 
+    <!-- Modal de Galeria -->
+    <div class="galeria-modal" id="galeriaModal">
+        <div class="galeria-content">
+            <button class="close-galeria">&times;</button>
+            <button class="galeria-nav galeria-prev">&#10094;</button>
+            <img class="galeria-img" id="galeriaImg" src="" alt="">
+            <button class="galeria-nav galeria-next">&#10095;</button>
+            <div class="galeria-counter" id="galeriaCounter"></div>
+        </div>
+    </div>
+
     <!-- Modal de Reserva -->
     <div class="modal" id="reservaModal">
         <div class="modal-content">
@@ -546,18 +702,25 @@
                     <input type="date" id="modalCheckout" required>
                 </div>
                 <div class="form-group">
-                    <label for="nomeCompleto">Nome Completo</label>
-                    <input type="text" id="nomeCompleto" required>
+                    <label for="nomeCompleto">Nome Completo *</label>
+                    <input type="text" id="nomeCompleto" required placeholder="Seu nome completo">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" value="leonardonardysc@gmail.com" readonly>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required placeholder="seu.email@gmail.com">
                 </div>
                 <div class="form-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" value="+238 917 71 61" readonly>
+                    <label for="telefone">Telefone *</label>
+                    <input type="tel" id="telefone" required placeholder="+238 XXX XX XX">
                 </div>
-                <button type="submit" class="pedir-reserva-btn">Confirmar Pedido de Reserva</button>
+                <div class="form-group">
+                    <label for="mensagem">Mensagem Adicional (Opcional)</label>
+                    <textarea id="mensagem" rows="3" placeholder="Alguma informação adicional sobre a sua reserva..."></textarea>
+                </div>
+                <div class="whatsapp-info">
+                    📱 Será redirecionado para o WhatsApp para confirmar a reserva
+                </div>
+                <button type="submit" class="pedir-reserva-btn">Enviar para WhatsApp</button>
             </form>
         </div>
     </div>
@@ -594,13 +757,17 @@
     </footer>
 
     <script>
-        // Dados dos hotéis fixos
+        // Dados dos hotéis fixos com imagens reais
         const hoteis = [
             {
                 id: 1,
                 nome: "Hotel Village Penareia",
                 preco: 22000,
-                imagem: "🏨",
+                imagens: [
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=500&h=300&fit=crop"
+                ],
                 descricao: "Complexo hoteleiro com piscina e vista deslumbrante para o mar",
                 comodidades: ["Piscina", "Wi-Fi Gratuito", "Ar Condicionado", "Restaurante", "Estacionamento", "Serviço de Quarto"],
                 capacidade: 4,
@@ -611,7 +778,11 @@
                 id: 2,
                 nome: "Bongalo Buzio Relax",
                 preco: 15000,
-                imagem: "🏝️",
+                imagens: [
+                    "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&h=300&fit=crop"
+                ],
                 descricao: "Bungalows rústicos à beira-mar com ambiente relaxante",
                 comodidades: ["Vista para o Mar", "Varanda Privada", "Cozinha Equipada", "Rede", "Churrasqueira", "Wi-Fi"],
                 capacidade: 3,
@@ -622,7 +793,11 @@
                 id: 3,
                 nome: "Quinta Refugio",
                 preco: 18000,
-                imagem: "🌿",
+                imagens: [
+                    "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=300&fit=crop"
+                ],
                 descricao: "Quinta tranquila com jardins exuberantes e atmosfera familiar",
                 comodidades: ["Jardim", "Piscina Natural", "Café da Manhã Incluído", "Estacionamento", "Área de Churrasco", "Wi-Fi"],
                 capacidade: 6,
@@ -633,7 +808,11 @@
                 id: 4,
                 nome: "Casa Socesso",
                 preco: 12000,
-                imagem: "🏠",
+                imagens: [
+                    "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=300&fit=crop"
+                ],
                 descricao: "Casa tradicional cabo-verdiana com arquitetura local autêntica",
                 comodidades: ["Cozinha Tradicional", "Pátio Interior", "Varanda", "Ventilador", "TV", "Wi-Fi"],
                 capacidade: 4,
@@ -644,7 +823,11 @@
                 id: 5,
                 nome: "Decor House",
                 preco: 25000,
-                imagem: "🎨",
+                imagens: [
+                    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&h=300&fit=crop"
+                ],
                 descricao: "Design moderno com decoração contemporânea e conforto premium",
                 comodidades: ["Design Interior", "Ar Condicionado", "Cozinha Moderna", "TV Smart", "Varanda Panorâmica", "Wi-Fi Rápido"],
                 capacidade: 2,
@@ -655,7 +838,11 @@
                 id: 6,
                 nome: "Villa Marisol",
                 preco: 32000,
-                imagem: "🌅",
+                imagens: [
+                    "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500&h=300&fit=crop",
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=300&fit=crop"
+                ],
                 descricao: "Villa exclusiva com piscina privativa e vista para o pôr do sol",
                 comodidades: ["Piscina Privativa", "3 Quartos", "Cozinha Completa", "Jardim", "Estacionamento", "Wi-Fi"],
                 capacidade: 8,
@@ -675,6 +862,16 @@
         const navMenu = document.querySelector('.nav-menu');
         const resultsInfo = document.getElementById('resultsInfo');
         const searchDates = document.getElementById('searchDates');
+        const galeriaModal = document.getElementById('galeriaModal');
+        const galeriaImg = document.getElementById('galeriaImg');
+        const galeriaCounter = document.getElementById('galeriaCounter');
+        const closeGaleria = document.querySelector('.close-galeria');
+        const galeriaPrev = document.querySelector('.galeria-prev');
+        const galeriaNext = document.querySelector('.galeria-next');
+
+        // Variáveis para controle da galeria
+        let imagensAtuais = [];
+        let indiceImagemAtual = 0;
 
         // Função para verificar se todos os campos estão preenchidos
         function verificarCampos() {
@@ -709,8 +906,8 @@
                 hotelCard.className = 'quarto-card';
                 hotelCard.style.animationDelay = `${index * 0.1}s`;
                 hotelCard.innerHTML = `
-                    <div class="quarto-img">
-                        ${hotel.imagem}
+                    <div class="quarto-img" data-hotel-id="${hotel.id}">
+                        <img src="${hotel.imagens[0]}" alt="${hotel.nome}" loading="lazy">
                         <div class="quarto-status">${hotel.classificacao}</div>
                     </div>
                     <div class="quarto-info">
@@ -736,10 +933,55 @@
                 });
             });
 
+            // Adicionar event listeners às imagens
+            document.querySelectorAll('.quarto-img').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    const hotelId = e.currentTarget.getAttribute('data-hotel-id');
+                    abrirGaleria(hotelId);
+                });
+            });
+
             // Rolar suavemente para a seção de hotéis
             document.getElementById('quartos').scrollIntoView({ 
                 behavior: 'smooth' 
             });
+        }
+
+        // Abrir galeria de imagens
+        function abrirGaleria(hotelId) {
+            const hotel = hoteis.find(h => h.id == hotelId);
+            if (hotel && hotel.imagens.length > 0) {
+                imagensAtuais = hotel.imagens;
+                indiceImagemAtual = 0;
+                atualizarGaleria();
+                galeriaModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Atualizar imagem da galeria
+        function atualizarGaleria() {
+            galeriaImg.src = imagensAtuais[indiceImagemAtual];
+            galeriaCounter.textContent = `${indiceImagemAtual + 1} / ${imagensAtuais.length}`;
+            galeriaImg.style.animation = 'zoomIn 0.3s ease';
+        }
+
+        // Fechar galeria
+        function fecharGaleria() {
+            galeriaModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navegar para imagem anterior
+        function imagemAnterior() {
+            indiceImagemAtual = (indiceImagemAtual - 1 + imagensAtuais.length) % imagensAtuais.length;
+            atualizarGaleria();
+        }
+
+        // Navegar para próxima imagem
+        function proximaImagem() {
+            indiceImagemAtual = (indiceImagemAtual + 1) % imagensAtuais.length;
+            atualizarGaleria();
         }
 
         // Formatador de preço
@@ -751,9 +993,15 @@
         function abrirModalReserva(hotelId, dadosBusca) {
             const hotel = hoteis.find(h => h.id == hotelId);
             if (hotel) {
+                // Limpar todos os campos exceto datas
                 document.getElementById('quartoNome').value = hotel.nome;
                 document.getElementById('modalCheckin').value = dadosBusca.checkin;
                 document.getElementById('modalCheckout').value = dadosBusca.checkout;
+                document.getElementById('nomeCompleto').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('telefone').value = '';
+                document.getElementById('mensagem').value = '';
+                
                 reservaModal.style.display = 'flex';
             }
         }
@@ -806,6 +1054,31 @@
             carregarHoteis(dadosBusca);
         }
 
+        // Enviar mensagem para WhatsApp
+        function enviarParaWhatsApp(dadosReserva) {
+            const numeroWhatsApp = '+2389177161'; // Número sem espaços
+            const mensagem = `📋 *PEDIDO DE RESERVA - TarrafalAccomodations*
+
+🏨 *Hotel:* ${dadosReserva.hotel}
+📅 *Check-in:* ${dadosReserva.checkin}
+📅 *Check-out:* ${dadosReserva.checkout}
+👤 *Nome:* ${dadosReserva.nome}
+📧 *Email:* ${dadosReserva.email}
+📞 *Telefone:* ${dadosReserva.telefone}
+${dadosReserva.mensagem ? `💬 *Mensagem:* ${dadosReserva.mensagem}` : ''}
+
+_Enviado através do site TarrafalAccomodations_`;
+
+            // Codificar a mensagem para URL
+            const mensagemCodificada = encodeURIComponent(mensagem);
+            
+            // Criar link do WhatsApp
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+            
+            // Abrir WhatsApp em nova aba
+            window.open(urlWhatsApp, '_blank');
+        }
+
         // Processar reserva
         function processarReserva(e) {
             e.preventDefault();
@@ -817,21 +1090,26 @@
                 nome: document.getElementById('nomeCompleto').value,
                 email: document.getElementById('email').value,
                 telefone: document.getElementById('telefone').value,
+                mensagem: document.getElementById('mensagem').value,
                 site: "TarrafalAccomodations",
                 developer: "Leonardo Nardy",
                 ano: 2025
             };
 
-            // Simular envio para base de dados
-            console.log('Pedido de reserva:', dadosReserva);
+            // Validar campos obrigatórios
+            if (!dadosReserva.nome || !dadosReserva.email || !dadosReserva.telefone) {
+                alert('Por favor, preencha todos os campos obrigatórios (*)');
+                return;
+            }
+
+            // Enviar para WhatsApp
+            enviarParaWhatsApp(dadosReserva);
             
-            alert(`Pedido de Reserva enviado com sucesso!\n\nHotel: ${dadosReserva.hotel}\nCheck-in: ${dadosReserva.checkin}\nCheck-out: ${dadosReserva.checkout}\n\nEntraremos em contacto dentro de 24h para confirmar a disponibilidade através de:\nEmail: ${dadosReserva.email}\nTelefone: ${dadosReserva.telefone}\n\nTarrafalAccomodations - Desenvolvido por Leonardo Nardy © 2025`);
+            // Fechar modal
             fecharModal();
-            reservaForm.reset();
             
-            // Restaurar valores fixos
-            document.getElementById('email').value = 'leonardonardysc@gmail.com';
-            document.getElementById('telefone').value = '+238 917 71 61';
+            // Mostrar mensagem de confirmação
+            alert('Abrindo WhatsApp para confirmar a sua reserva...');
         }
 
         // Event Listeners
@@ -848,6 +1126,20 @@
             document.getElementById('criancas').addEventListener('change', verificarCampos);
         });
 
+        // Event Listeners para galeria
+        closeGaleria.addEventListener('click', fecharGaleria);
+        galeriaPrev.addEventListener('click', imagemAnterior);
+        galeriaNext.addEventListener('click', proximaImagem);
+
+        // Navegação por teclado na galeria
+        document.addEventListener('keydown', (e) => {
+            if (galeriaModal.style.display === 'flex') {
+                if (e.key === 'Escape') fecharGaleria();
+                if (e.key === 'ArrowLeft') imagemAnterior();
+                if (e.key === 'ArrowRight') proximaImagem();
+            }
+        });
+
         searchForm.addEventListener('submit', processarBusca);
         reservaForm.addEventListener('submit', processarReserva);
         closeModal.addEventListener('click', fecharModal);
@@ -857,6 +1149,9 @@
         window.addEventListener('click', (e) => {
             if (e.target === reservaModal) {
                 fecharModal();
+            }
+            if (e.target === galeriaModal) {
+                fecharGaleria();
             }
         });
 
