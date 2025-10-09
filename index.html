@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TarrafalAccomodations - Sua Casa em Cabo Verde</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset e Estilos Globais */
         * {
@@ -29,6 +30,82 @@
             line-height: 1.6;
         }
 
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+            background: #1da851;
+        }
+
+        .whatsapp-btn i {
+            font-size: 32px;
+            color: var(--white);
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .whatsapp-btn:hover .whatsapp-tooltip {
+            opacity: 1;
+            right: 75px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        /* Resto do CSS permanece exatamente igual */
         /* Header e Navegação */
         header {
             background: linear-gradient(135deg, var(--primary-color), #1e3a23);
@@ -573,6 +650,19 @@
                 top: 10px;
                 right: 10px;
             }
+
+            .whatsapp-btn {
+                width: 55px;
+                height: 55px;
+            }
+
+            .whatsapp-btn i {
+                font-size: 28px;
+            }
+
+            .whatsapp-tooltip {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -595,10 +685,35 @@
             .galeria-content {
                 max-width: 95%;
             }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-btn i {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Botão WhatsApp Flutuante -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/2389177161?text=Olá! Gostaria de mais informações sobre as acomodações no Tarrafal." 
+           class="whatsapp-btn" 
+           target="_blank"
+           aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-tooltip">Fale Conosco</span>
+        </a>
+    </div>
+
     <!-- Header -->
     <header>
         <nav class="nav-container">
@@ -616,6 +731,7 @@
         </nav>
     </header>
 
+    <!-- Resto do código HTML permanece exatamente igual -->
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-content">
@@ -756,6 +872,7 @@
         </div>
     </footer>
 
+    <!-- O JavaScript permanece exatamente igual -->
     <script>
         // Dados dos hotéis fixos com imagens reais
         const hoteis = [
