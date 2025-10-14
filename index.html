@@ -149,6 +149,7 @@
             color: var(--white);
             text-decoration: none;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .nav-menu a:hover {
@@ -724,7 +725,7 @@
             <button class="mobile-menu-btn">☰</button>
             <ul class="nav-menu">
                 <li><a href="#inicio">Início</a></li>
-                <li><a href="#quartos">Hotéis</a></li>
+                <li><a href="#quartos" id="menuHoteis">Hotéis</a></li>
                 <li><a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank">Sobre</a></li>
                 <li><a href="#contactos">Contactos</a></li>
             </ul>
@@ -872,7 +873,6 @@
         </div>
     </footer>
 
-    <!-- O JavaScript permanece exatamente igual -->
     <script>
         // Dados dos hotéis fixos com imagens reais
         const hoteis = [
@@ -985,6 +985,7 @@
         const closeGaleria = document.querySelector('.close-galeria');
         const galeriaPrev = document.querySelector('.galeria-prev');
         const galeriaNext = document.querySelector('.galeria-next');
+        const menuHoteis = document.getElementById('menuHoteis');
 
         // Variáveis para controle da galeria
         let imagensAtuais = [];
@@ -1009,14 +1010,18 @@
         }
 
         // Carregar todos os hotéis (sempre os 6)
-        function carregarHoteis(dadosBusca) {
+        function carregarHoteis(dadosBusca = null) {
             quartosGrid.innerHTML = '';
-            resultsInfo.style.display = 'block';
             
-            // Formatar datas para exibição
-            const checkinFormatado = new Date(dadosBusca.checkin).toLocaleDateString('pt-CV');
-            const checkoutFormatado = new Date(dadosBusca.checkout).toLocaleDateString('pt-CV');
-            searchDates.textContent = `Check-in: ${checkinFormatado} | Check-out: ${checkoutFormatado} | ${dadosBusca.adultos} Adulto(s), ${dadosBusca.criancas} Criança(s)`;
+            if (dadosBusca) {
+                resultsInfo.style.display = 'block';
+                // Formatar datas para exibição
+                const checkinFormatado = new Date(dadosBusca.checkin).toLocaleDateString('pt-CV');
+                const checkoutFormatado = new Date(dadosBusca.checkout).toLocaleDateString('pt-CV');
+                searchDates.textContent = `Check-in: ${checkinFormatado} | Check-out: ${checkoutFormatado} | ${dadosBusca.adultos} Adulto(s), ${dadosBusca.criancas} Criança(s)`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
 
             hoteis.forEach((hotel, index) => {
                 const hotelCard = document.createElement('div');
@@ -1062,6 +1067,11 @@
             document.getElementById('quartos').scrollIntoView({ 
                 behavior: 'smooth' 
             });
+        }
+
+        // Função para mostrar todos os hotéis ao clicar no menu
+        function mostrarTodosHoteis() {
+            carregarHoteis(); // Chama sem dados de busca
         }
 
         // Abrir galeria de imagens
@@ -1112,8 +1122,16 @@
             if (hotel) {
                 // Limpar todos os campos exceto datas
                 document.getElementById('quartoNome').value = hotel.nome;
-                document.getElementById('modalCheckin').value = dadosBusca.checkin;
-                document.getElementById('modalCheckout').value = dadosBusca.checkout;
+                
+                // Se vier de uma busca, usar as datas da busca, senão deixar vazio
+                if (dadosBusca) {
+                    document.getElementById('modalCheckin').value = dadosBusca.checkin;
+                    document.getElementById('modalCheckout').value = dadosBusca.checkout;
+                } else {
+                    document.getElementById('modalCheckin').value = '';
+                    document.getElementById('modalCheckout').value = '';
+                }
+                
                 document.getElementById('nomeCompleto').value = '';
                 document.getElementById('email').value = '';
                 document.getElementById('telefone').value = '';
@@ -1247,6 +1265,12 @@ _Enviado através do site TarrafalAccomodations_`;
         closeGaleria.addEventListener('click', fecharGaleria);
         galeriaPrev.addEventListener('click', imagemAnterior);
         galeriaNext.addEventListener('click', proximaImagem);
+
+        // Event Listener para o menu Hotéis
+        menuHoteis.addEventListener('click', function(e) {
+            e.preventDefault();
+            mostrarTodosHoteis();
+        });
 
         // Navegação por teclado na galeria
         document.addEventListener('keydown', (e) => {
