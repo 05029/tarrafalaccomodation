@@ -196,90 +196,185 @@
             animation: fadeInUp 1s ease 0.2s both;
         }
 
-        /* Search Form */
-        .search-form {
+        /* NOVO FORMULÁRIO SIMPLES ESTILO EXPEDIA */
+        .search-form-expedia {
             background: var(--white);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            max-width: 900px;
             margin: -50px auto 2rem;
             position: relative;
             z-index: 100;
             border: 1px solid var(--border-color);
         }
 
-        .form-grid {
+        .search-fields {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 2fr 2fr 2fr 1fr;
             gap: 1rem;
+            align-items: end;
         }
 
-        .form-group {
+        .search-field {
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .form-group label {
+        .search-field label {
             font-weight: 600;
-            margin-bottom: 0.5rem;
             color: var(--text-color);
             font-size: 0.9rem;
         }
 
-        .form-group input,
-        .form-group select {
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
+        .input-with-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 12px;
+            color: var(--gray-text);
+            z-index: 2;
+        }
+
+        .input-with-icon input,
+        .search-field select {
+            width: 100%;
+            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             background: var(--white);
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
+        .input-with-icon input:focus,
+        .search-field select:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(26, 109, 252, 0.1);
+            box-shadow: 0 0 0 3px rgba(26, 109, 252, 0.1);
         }
 
-        .form-group input:invalid,
-        .form-group select:invalid {
-            border-color: #ff6b6b;
-        }
-
-        .form-group input:valid,
-        .form-group select:valid {
-            border-color: var(--secondary-color);
-        }
-
-        .search-btn {
-            background: #ccc;
-            color: #666;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: not-allowed;
-            transition: all 0.3s;
-            align-self: end;
-        }
-
-        .search-btn.active {
+        .search-main-btn {
             background: var(--primary-color);
             color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            height: fit-content;
         }
 
-        .search-btn.active:hover {
+        .search-main-btn:hover {
             background: #0d4fbf;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 109, 252, 0.3);
         }
 
-        /* Quartos Section */
-        .quartos-section {
+        /* Seção Localização */
+        .localizacao-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .localizacao-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .localizacao-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+
+        .localizacao-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .localizacao-img {
+            width: 100%;
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .localizacao-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .localizacao-card:hover .localizacao-img img {
+            transform: scale(1.05);
+        }
+
+        .localizacao-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
+        }
+
+        .localizacao-content {
+            padding: 1.5rem;
+        }
+
+        .localizacao-content h3 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .localizacao-content p {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .localizacao-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .localizacao-btn:hover {
+            background: #0d4fbf;
+        }
+
+        /* Seção Nossos Hotéis Parceiros */
+        .hoteis-parceiros-section {
             max-width: 1200px;
             margin: 4rem auto;
             padding: 0 2rem;
@@ -293,40 +388,27 @@
             font-weight: 700;
         }
 
-        .results-info {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: var(--white);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .quartos-grid {
+        .hoteis-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
-        .quarto-card {
+        .hotel-card {
             background: var(--white);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
             border: 1px solid var(--border-color);
         }
 
-        .quarto-card:hover {
+        .hotel-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .quarto-img {
+        .hotel-img {
             width: 100%;
             height: 200px;
             position: relative;
@@ -334,18 +416,18 @@
             cursor: pointer;
         }
 
-        .quarto-img img {
+        .hotel-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s;
         }
 
-        .quarto-img:hover img {
+        .hotel-img:hover img {
             transform: scale(1.05);
         }
 
-        .quarto-status {
+        .hotel-status {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -357,50 +439,69 @@
             font-weight: 600;
         }
 
-        .quarto-info {
+        .hotel-info {
             padding: 1.5rem;
         }
 
-        .quarto-info h3 {
+        .hotel-info h3 {
             color: var(--text-color);
             margin-bottom: 0.5rem;
             font-size: 1.3rem;
             font-weight: 600;
         }
 
-        .quarto-info p {
+        .hotel-info p {
             color: var(--gray-text);
             margin-bottom: 1rem;
             line-height: 1.5;
         }
 
-        .quarto-preco {
+        .hotel-localizacao {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hotel-localizacao::before {
+            content: "📍";
+        }
+
+        .hotel-capacidade {
+            color: var(--gray-text);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .hotel-preco {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--secondary-color);
             margin: 1rem 0;
         }
 
-        .quarto-features {
+        .hotel-features {
             list-style: none;
             margin: 1rem 0;
         }
 
-        .quarto-features li {
+        .hotel-features li {
             padding: 0.25rem 0;
             display: flex;
             align-items: center;
             color: var(--gray-text);
         }
 
-        .quarto-features li::before {
+        .hotel-features li::before {
             content: "✓";
             color: var(--secondary-color);
             font-weight: bold;
             margin-right: 0.5rem;
         }
 
-        .pedir-reserva-btn {
+        .hotel-reserva-btn {
             background: var(--primary-color);
             color: var(--white);
             border: none;
@@ -413,166 +514,9 @@
             font-weight: 600;
         }
 
-        .pedir-reserva-btn:hover {
+        .hotel-reserva-btn:hover {
             background: #0d4fbf;
             transform: translateY(-2px);
-        }
-
-        /* Modal de Galeria */
-        .galeria-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 3000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .galeria-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .galeria-img {
-            max-width: 100%;
-            max-height: 90vh;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-        }
-
-        .close-galeria {
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            background: var(--accent-color);
-            color: var(--white);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-
-        .close-galeria:hover {
-            background: #e66d00;
-        }
-
-        .galeria-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            color: var(--white);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-
-        .galeria-nav:hover {
-            background: rgba(255,255,255,0.4);
-        }
-
-        .galeria-prev {
-            left: -60px;
-        }
-
-        .galeria-next {
-            right: -60px;
-        }
-
-        .galeria-counter {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--white);
-            font-size: 1rem;
-            background: rgba(0,0,0,0.5);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-        }
-
-        /* Modal de Reserva */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
-
-        .modal-header h3 {
-            color: var(--text-color);
-            font-weight: 600;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-text);
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: var(--text-color);
-        }
-
-        .whatsapp-info {
-            background: #25D366;
-            color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-            text-align: center;
-            font-weight: 600;
         }
 
         /* Footer */
@@ -625,17 +569,6 @@
             }
         }
 
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         /* Responsividade */
         @media (max-width: 768px) {
             .nav-menu {
@@ -661,37 +594,29 @@
                 font-size: 2rem;
             }
 
-            .search-form {
+            .search-form-expedia {
                 margin: -30px 1rem 2rem;
                 padding: 1.5rem;
             }
 
-            .form-grid {
+            .search-fields {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
-            .quartos-section {
+            .localizacao-section,
+            .hoteis-parceiros-section {
                 margin: 2rem auto;
                 padding: 0 1rem;
             }
 
-            .galeria-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
+            .localizacao-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
             }
 
-            .galeria-prev {
-                left: 10px;
-            }
-
-            .galeria-next {
-                right: 10px;
-            }
-
-            .close-galeria {
-                top: 10px;
-                right: 10px;
+            .hoteis-grid {
+                grid-template-columns: 1fr;
             }
 
             .whatsapp-btn {
@@ -721,12 +646,12 @@
                 font-size: 1.5rem;
             }
 
-            .quarto-card {
-                margin: 0 0.5rem;
+            .localizacao-grid {
+                grid-template-columns: 1fr;
             }
 
-            .galeria-content {
-                max-width: 95%;
+            .hotel-card {
+                margin: 0 0.5rem;
             }
 
             .whatsapp-float {
@@ -767,7 +692,8 @@
             <button class="mobile-menu-btn">☰</button>
             <ul class="nav-menu">
                 <li><a href="#inicio">Início</a></li>
-                <li><a href="#quartos" id="menuHoteis">Hotéis</a></li>
+                <li><a href="#localizacao" id="menuLocalizacao">Localizações</a></li>
+                <li><a href="#hoteis-parceiros" id="menuHoteis">Hotéis</a></li>
                 <li><a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank">Sobre</a></li>
                 <li><a href="#contactos">Contactos</a></li>
             </ul>
@@ -782,106 +708,160 @@
         </div>
     </section>
 
-    <!-- Search Form -->
-    <form class="search-form" id="searchForm">
-        <div class="form-grid">
-            <div class="form-group">
+    <!-- NOVO FORMULÁRIO SIMPLES ESTILO EXPEDIA -->
+    <form class="search-form-expedia" id="searchForm">
+        <div class="search-fields">
+            <!-- Destino Fixo -->
+            <div class="search-field">
+                <label for="destino">Para onde?</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="destino" value="Tarrafal, Cabo Verde" readonly>
+                </div>
+            </div>
+
+            <!-- Check-in -->
+            <div class="search-field">
                 <label for="checkin">Check-in</label>
-                <input type="date" id="checkin" required>
+                <div class="input-with-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" id="checkin" required>
+                </div>
             </div>
-            <div class="form-group">
+
+            <!-- Check-out -->
+            <div class="search-field">
                 <label for="checkout">Check-out</label>
-                <input type="date" id="checkout" required>
+                <div class="input-with-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" id="checkout" required>
+                </div>
             </div>
-            <div class="form-group">
+
+            <!-- Botão de Busca -->
+            <button type="submit" class="search-main-btn">
+                <i class="fas fa-search"></i>
+                Buscar
+            </button>
+        </div>
+
+        <!-- Linha adicional para Viajantes -->
+        <div class="search-fields" style="margin-top: 1rem;">
+            <!-- Adultos -->
+            <div class="search-field">
                 <label for="adultos">Adultos</label>
                 <select id="adultos" required>
                     <option value="">Selecionar...</option>
                     <option value="1">1 Adulto</option>
-                    <option value="2">2 Adultos</option>
+                    <option value="2" selected>2 Adultos</option>
                     <option value="3">3 Adultos</option>
                     <option value="4">4 Adultos</option>
                 </select>
             </div>
-            <div class="form-group">
+
+            <!-- Crianças -->
+            <div class="search-field">
                 <label for="criancas">Crianças</label>
                 <select id="criancas" required>
-                    <option value="">Selecionar...</option>
-                    <option value="0">0 Crianças</option>
+                    <option value="0" selected>0 Crianças</option>
                     <option value="1">1 Criança</option>
                     <option value="2">2 Crianças</option>
                 </select>
             </div>
-            <button type="submit" class="search-btn" id="searchBtn" disabled>Procurar Possíveis Quartos</button>
+
+            <!-- Quartos -->
+            <div class="search-field">
+                <label for="quartos">Quartos</label>
+                <select id="quartos" required>
+                    <option value="1" selected>1 Quarto</option>
+                    <option value="2">2 Quartos</option>
+                    <option value="3">3 Quartos</option>
+                </select>
+            </div>
+
+            <!-- Espaço vazio para alinhar -->
+            <div></div>
         </div>
     </form>
 
-    <!-- Hotéis Section -->
-    <section class="quartos-section" id="quartos">
-        <h2 class="section-title">Nossos Hotéis Parceiros</h2>
-        <div class="results-info" id="resultsInfo" style="display: none;">
-            <h3>Hotéis Disponíveis para as suas datas</h3>
-            <p id="searchDates"></p>
-        </div>
-        <div class="quartos-grid" id="quartosGrid">
-            <!-- Os hotéis serão carregados via JavaScript quando a busca for feita -->
+    <!-- SEÇÃO: Reserve Perto de onde quiser (RESTAURADA) -->
+    <section class="localizacao-section" id="localizacao">
+        <h2 class="section-title">Reserve Perto de onde quiser</h2>
+        <div class="localizacao-grid">
+            <!-- Pôr do Mar -->
+            <div class="localizacao-card" data-categoria="por-do-mar">
+                <div class="localizacao-img">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Pôr do Mar">
+                    <div class="localizacao-overlay"></div>
+                </div>
+                <div class="localizacao-content">
+                    <h3>Pôr do Mar</h3>
+                    <p>Acomodações com vistas espetaculares para o pôr do sol no oceano</p>
+                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('por-do-mar')">Ver Hotéis</button>
+                </div>
+            </div>
+
+            <!-- Centro -->
+            <div class="localizacao-card" data-categoria="centro">
+                <div class="localizacao-img">
+                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Centro da Cidade">
+                    <div class="localizacao-overlay"></div>
+                </div>
+                <div class="localizacao-content">
+                    <h3>Centro</h3>
+                    <p>Hotéis no coração da cidade, perto de restaurantes e comércio</p>
+                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('centro')">Ver Hotéis</button>
+                </div>
+            </div>
+
+            <!-- Zona de Transporte -->
+            <div class="localizacao-card" data-categoria="transporte">
+                <div class="localizacao-img">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop" alt="Zona de Transporte">
+                    <div class="localizacao-overlay"></div>
+                </div>
+                <div class="localizacao-content">
+                    <h3>Zona de Transporte</h3>
+                    <p>Acesso fácil a terminais de transporte e principais vias</p>
+                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('transporte')">Ver Hotéis</button>
+                </div>
+            </div>
+
+            <!-- Localidade -->
+            <div class="localizacao-card" data-categoria="localidade">
+                <div class="localizacao-img">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop" alt="Localidade">
+                    <div class="localizacao-overlay"></div>
+                </div>
+                <div class="localizacao-content">
+                    <h3>Localidade</h3>
+                    <p>Imersão na cultura local e comunidades autênticas</p>
+                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('localidade')">Ver Hotéis</button>
+                </div>
+            </div>
+
+            <!-- Montanha -->
+            <div class="localizacao-card" data-categoria="montanha">
+                <div class="localizacao-img">
+                    <img src="https://images.unsplash.com/photo-1464822759849-e30de63b6a44?w=400&h=300&fit=crop" alt="Montanha">
+                    <div class="localizacao-overlay"></div>
+                </div>
+                <div class="localizacao-content">
+                    <h3>Montanha</h3>
+                    <p>Acomodações serranas com ar puro e natureza preservada</p>
+                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('montanha')">Ver Hotéis</button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Modal de Galeria -->
-    <div class="galeria-modal" id="galeriaModal">
-        <div class="galeria-content">
-            <button class="close-galeria">&times;</button>
-            <button class="galeria-nav galeria-prev">&#10094;</button>
-            <img class="galeria-img" id="galeriaImg" src="" alt="">
-            <button class="galeria-nav galeria-next">&#10095;</button>
-            <div class="galeria-counter" id="galeriaCounter"></div>
+    <!-- SEÇÃO: Nossos Hotéis Parceiros (RESTAURADA) -->
+    <section class="hoteis-parceiros-section" id="hoteis-parceiros">
+        <h2 class="section-title">Nossos Hotéis Parceiros</h2>
+        <div class="hoteis-grid" id="hoteisGrid">
+            <!-- Os hotéis serão carregados automaticamente via JavaScript -->
         </div>
-    </div>
-
-    <!-- Modal de Reserva -->
-    <div class="modal" id="reservaModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Pedir Reserva - TarrafalAccomodations</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="reservaForm">
-                <div class="form-group">
-                    <label for="quartoNome">Hotel</label>
-                    <input type="text" id="quartoNome" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="modalCheckin">Check-in</label>
-                    <input type="date" id="modalCheckin" required>
-                </div>
-                <div class="form-group">
-                    <label for="modalCheckout">Check-out</label>
-                    <input type="date" id="modalCheckout" required>
-                </div>
-                <div class="form-group">
-                    <label for="nomeCompleto">Nome Completo *</label>
-                    <input type="text" id="nomeCompleto" required placeholder="Seu nome completo">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" required placeholder="seu.email@gmail.com">
-                </div>
-                <div class="form-group">
-                    <label for="telefone">Telefone *</label>
-                    <input type="tel" id="telefone" required placeholder="+238 XXX XX XX">
-                </div>
-                <div class="form-group">
-                    <label for="mensagem">Mensagem Adicional (Opcional)</label>
-                    <textarea id="mensagem" rows="3" placeholder="Alguma informação adicional sobre a sua reserva..."></textarea>
-                </div>
-                <div class="whatsapp-info">
-                    📱 Será redirecionado para o WhatsApp para confirmar a reserva
-                </div>
-                <button type="submit" class="pedir-reserva-btn">Enviar para WhatsApp</button>
-            </form>
-        </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer id="contactos">
@@ -904,7 +884,8 @@
             <div class="footer-section">
                 <h3>Links Rápidos</h3>
                 <p><a href="#inicio" style="color: white;">Início</a></p>
-                <p><a href="#quartos" style="color: white;">Hotéis</a></p>
+                <p><a href="#localizacao" style="color: white;">Localizações</a></p>
+                <p><a href="#hoteis-parceiros" style="color: white;">Hotéis</a></p>
                 <p><a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank" style="color: white;">Sobre</a></p>
                 <p><a href="#contactos" style="color: white;">Contactos</a></p>
             </div>
@@ -915,7 +896,7 @@
     </footer>
 
     <script>
-        // Dados dos hotéis fixos com imagens reais
+        // Dados dos hotéis
         const hoteis = [
             {
                 id: 1,
@@ -930,7 +911,8 @@
                 comodidades: ["Piscina", "Wi-Fi Gratuito", "Ar Condicionado", "Restaurante", "Estacionamento", "Serviço de Quarto"],
                 capacidade: 4,
                 localizacao: "Praia do Tarrafal",
-                classificacao: "⭐⭐⭐⭐"
+                classificacao: "⭐⭐⭐⭐",
+                categoria: "por-do-mar"
             },
             {
                 id: 2,
@@ -945,7 +927,8 @@
                 comodidades: ["Vista para o Mar", "Varanda Privada", "Cozinha Equipada", "Rede", "Churrasqueira", "Wi-Fi"],
                 capacidade: 3,
                 localizacao: "Baía do Tarrafal",
-                classificacao: "⭐⭐⭐"
+                classificacao: "⭐⭐⭐",
+                categoria: "por-do-mar"
             },
             {
                 id: 3,
@@ -960,7 +943,8 @@
                 comodidades: ["Jardim", "Piscina Natural", "Café da Manhã Incluído", "Estacionamento", "Área de Churrasco", "Wi-Fi"],
                 capacidade: 6,
                 localizacao: "Serra do Tarrafal",
-                classificacao: "⭐⭐⭐⭐"
+                classificacao: "⭐⭐⭐⭐",
+                categoria: "montanha"
             },
             {
                 id: 4,
@@ -975,7 +959,8 @@
                 comodidades: ["Cozinha Tradicional", "Pátio Interior", "Varanda", "Ventilador", "TV", "Wi-Fi"],
                 capacidade: 4,
                 localizacao: "Centro do Tarrafal",
-                classificacao: "⭐⭐⭐"
+                classificacao: "⭐⭐⭐",
+                categoria: "centro"
             },
             {
                 id: 5,
@@ -990,7 +975,8 @@
                 comodidades: ["Design Interior", "Ar Condicionado", "Cozinha Moderna", "TV Smart", "Varanda Panorâmica", "Wi-Fi Rápido"],
                 capacidade: 2,
                 localizacao: "Área Nobre do Tarrafal",
-                classificacao: "⭐⭐⭐⭐⭐"
+                classificacao: "⭐⭐⭐⭐⭐",
+                categoria: "localidade"
             },
             {
                 id: 6,
@@ -1005,353 +991,63 @@
                 comodidades: ["Piscina Privativa", "3 Quartos", "Cozinha Completa", "Jardim", "Estacionamento", "Wi-Fi"],
                 capacidade: 8,
                 localizacao: "Ponta do Tarrafal",
-                classificacao: "⭐⭐⭐⭐⭐"
+                classificacao: "⭐⭐⭐⭐⭐",
+                categoria: "transporte"
             }
         ];
 
-        // Elementos DOM
-        const quartosGrid = document.getElementById('quartosGrid');
-        const searchForm = document.getElementById('searchForm');
-        const searchBtn = document.getElementById('searchBtn');
-        const reservaModal = document.getElementById('reservaModal');
-        const reservaForm = document.getElementById('reservaForm');
-        const closeModal = document.querySelector('.close-modal');
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        const resultsInfo = document.getElementById('resultsInfo');
-        const searchDates = document.getElementById('searchDates');
-        const galeriaModal = document.getElementById('galeriaModal');
-        const galeriaImg = document.getElementById('galeriaImg');
-        const galeriaCounter = document.getElementById('galeriaCounter');
-        const closeGaleria = document.querySelector('.close-galeria');
-        const galeriaPrev = document.querySelector('.galeria-prev');
-        const galeriaNext = document.querySelector('.galeria-next');
-        const menuHoteis = document.getElementById('menuHoteis');
-
-        // Variáveis para controle da galeria
-        let imagensAtuais = [];
-        let indiceImagemAtual = 0;
-
-        // Função para verificar se todos os campos estão preenchidos
-        function verificarCampos() {
-            const checkin = document.getElementById('checkin').value;
-            const checkout = document.getElementById('checkout').value;
-            const adultos = document.getElementById('adultos').value;
-            const criancas = document.getElementById('criancas').value;
-
-            const todosPreenchidos = checkin && checkout && adultos && criancas;
-
-            if (todosPreenchidos) {
-                searchBtn.classList.add('active');
-                searchBtn.disabled = false;
-            } else {
-                searchBtn.classList.remove('active');
-                searchBtn.disabled = true;
-            }
-        }
-
-        // Carregar todos os hotéis (sempre os 6)
-        function carregarHoteis(dadosBusca = null) {
-            quartosGrid.innerHTML = '';
-            
-            if (dadosBusca) {
-                resultsInfo.style.display = 'block';
-                // Formatar datas para exibição
-                const checkinFormatado = new Date(dadosBusca.checkin).toLocaleDateString('pt-CV');
-                const checkoutFormatado = new Date(dadosBusca.checkout).toLocaleDateString('pt-CV');
-                searchDates.textContent = `Check-in: ${checkinFormatado} | Check-out: ${checkoutFormatado} | ${dadosBusca.adultos} Adulto(s), ${dadosBusca.criancas} Criança(s)`;
-            } else {
-                resultsInfo.style.display = 'none';
-            }
+        // Carregar hotéis automaticamente
+        function carregarTodosHoteis() {
+            const hoteisGrid = document.getElementById('hoteisGrid');
+            hoteisGrid.innerHTML = '';
 
             hoteis.forEach((hotel, index) => {
                 const hotelCard = document.createElement('div');
-                hotelCard.className = 'quarto-card';
+                hotelCard.className = 'hotel-card';
                 hotelCard.style.animationDelay = `${index * 0.1}s`;
                 hotelCard.innerHTML = `
-                    <div class="quarto-img" data-hotel-id="${hotel.id}">
+                    <div class="hotel-img" data-hotel-id="${hotel.id}">
                         <img src="${hotel.imagens[0]}" alt="${hotel.nome}" loading="lazy">
-                        <div class="quarto-status">${hotel.classificacao}</div>
+                        <div class="hotel-status">${hotel.classificacao}</div>
                     </div>
-                    <div class="quarto-info">
+                    <div class="hotel-info">
                         <h3>${hotel.nome}</h3>
                         <p>${hotel.descricao}</p>
-                        <p><strong>📍 ${hotel.localizacao}</strong></p>
-                        <p><strong>Capacidade: ${hotel.capacidade} pessoa(s)</strong></p>
-                        <ul class="quarto-features">
+                        <div class="hotel-localizacao">${hotel.localizacao}</div>
+                        <div class="hotel-capacidade"><strong>Capacidade:</strong> ${hotel.capacidade} pessoa(s)</div>
+                        <ul class="hotel-features">
                             ${hotel.comodidades.map(comodidade => `<li>${comodidade}</li>`).join('')}
                         </ul>
-                        <div class="quarto-preco">${formatarPreco(hotel.preco)}/noite</div>
-                        <button class="pedir-reserva-btn" data-id="${hotel.id}">Pedir Reserva</button>
+                        <div class="hotel-preco">${formatarPreco(hotel.preco)}/noite</div>
+                        <button class="hotel-reserva-btn" data-id="${hotel.id}">Pedir Reserva</button>
                     </div>
                 `;
-                quartosGrid.appendChild(hotelCard);
-            });
-
-            // Adicionar event listeners aos botões de reserva
-            document.querySelectorAll('.pedir-reserva-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const hotelId = e.target.getAttribute('data-id');
-                    abrirModalReserva(hotelId, dadosBusca);
-                });
-            });
-
-            // Adicionar event listeners às imagens
-            document.querySelectorAll('.quarto-img').forEach(img => {
-                img.addEventListener('click', (e) => {
-                    const hotelId = e.currentTarget.getAttribute('data-hotel-id');
-                    abrirGaleria(hotelId);
-                });
-            });
-
-            // Rolar suavemente para a seção de hotéis
-            document.getElementById('quartos').scrollIntoView({ 
-                behavior: 'smooth' 
+                hoteisGrid.appendChild(hotelCard);
             });
         }
 
-        // Função para mostrar todos os hotéis ao clicar no menu
-        function mostrarTodosHoteis() {
-            carregarHoteis(); // Chama sem dados de busca
-        }
-
-        // Abrir galeria de imagens
-        function abrirGaleria(hotelId) {
-            const hotel = hoteis.find(h => h.id == hotelId);
-            if (hotel && hotel.imagens.length > 0) {
-                imagensAtuais = hotel.imagens;
-                indiceImagemAtual = 0;
-                atualizarGaleria();
-                galeriaModal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        // Atualizar imagem da galeria
-        function atualizarGaleria() {
-            galeriaImg.src = imagensAtuais[indiceImagemAtual];
-            galeriaCounter.textContent = `${indiceImagemAtual + 1} / ${imagensAtuais.length}`;
-            galeriaImg.style.animation = 'zoomIn 0.3s ease';
-        }
-
-        // Fechar galeria
-        function fecharGaleria() {
-            galeriaModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Navegar para imagem anterior
-        function imagemAnterior() {
-            indiceImagemAtual = (indiceImagemAtual - 1 + imagensAtuais.length) % imagensAtuais.length;
-            atualizarGaleria();
-        }
-
-        // Navegar para próxima imagem
-        function proximaImagem() {
-            indiceImagemAtual = (indiceImagemAtual + 1) % imagensAtuais.length;
-            atualizarGaleria();
-        }
-
-        // Formatador de preço
         function formatarPreco(preco) {
             return `${preco.toLocaleString('pt-CV')} CVE`;
         }
 
-        // Abrir modal de reserva
-        function abrirModalReserva(hotelId, dadosBusca) {
-            const hotel = hoteis.find(h => h.id == hotelId);
-            if (hotel) {
-                // Limpar todos os campos exceto datas
-                document.getElementById('quartoNome').value = hotel.nome;
-                
-                // Se vier de uma busca, usar as datas da busca, senão deixar vazio
-                if (dadosBusca) {
-                    document.getElementById('modalCheckin').value = dadosBusca.checkin;
-                    document.getElementById('modalCheckout').value = dadosBusca.checkout;
-                } else {
-                    document.getElementById('modalCheckin').value = '';
-                    document.getElementById('modalCheckout').value = '';
-                }
-                
-                document.getElementById('nomeCompleto').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('telefone').value = '';
-                document.getElementById('mensagem').value = '';
-                
-                reservaModal.style.display = 'flex';
-            }
+        function filtrarPorLocalizacao(categoria) {
+            const hoteisFiltrados = hoteis.filter(hotel => hotel.categoria === categoria);
+            // Implementar filtragem aqui
+            alert(`Mostrando hotéis na categoria: ${categoria}`);
         }
 
-        // Fechar modal
-        function fecharModal() {
-            reservaModal.style.display = 'none';
-        }
-
-        // Toggle menu mobile
-        function toggleMobileMenu() {
-            navMenu.classList.toggle('active');
-        }
-
-        // Validar datas no formulário de busca
-        function validarDatas() {
-            const checkin = new Date(document.getElementById('checkin').value);
-            const checkout = new Date(document.getElementById('checkout').value);
-            const hoje = new Date();
-            hoje.setHours(0, 0, 0, 0);
-
-            if (checkin < hoje) {
-                alert('A data de check-in não pode ser no passado');
-                return false;
-            }
-
-            if (checkout <= checkin) {
-                alert('A data de check-out deve ser após a data de check-in');
-                return false;
-            }
-
-            return true;
-        }
-
-        // Processar busca
-        function processarBusca(e) {
-            e.preventDefault();
-            
-            if (!validarDatas()) {
-                return;
-            }
-
-            const dadosBusca = {
-                checkin: document.getElementById('checkin').value,
-                checkout: document.getElementById('checkout').value,
-                adultos: document.getElementById('adultos').value,
-                criancas: document.getElementById('criancas').value
-            };
-
-            carregarHoteis(dadosBusca);
-        }
-
-        // Enviar mensagem para WhatsApp
-        function enviarParaWhatsApp(dadosReserva) {
-            const numeroWhatsApp = '+2389177161'; // Número sem espaços
-            const mensagem = `📋 *PEDIDO DE RESERVA - TarrafalAccomodations*
-
-🏨 *Hotel:* ${dadosReserva.hotel}
-📅 *Check-in:* ${dadosReserva.checkin}
-📅 *Check-out:* ${dadosReserva.checkout}
-👤 *Nome:* ${dadosReserva.nome}
-📧 *Email:* ${dadosReserva.email}
-📞 *Telefone:* ${dadosReserva.telefone}
-${dadosReserva.mensagem ? `💬 *Mensagem:* ${dadosReserva.mensagem}` : ''}
-
-_Enviado através do site TarrafalAccomodations_`;
-
-            // Codificar a mensagem para URL
-            const mensagemCodificada = encodeURIComponent(mensagem);
-            
-            // Criar link do WhatsApp
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
-            
-            // Abrir WhatsApp em nova aba
-            window.open(urlWhatsApp, '_blank');
-        }
-
-        // Processar reserva
-        function processarReserva(e) {
-            e.preventDefault();
-            
-            const dadosReserva = {
-                hotel: document.getElementById('quartoNome').value,
-                checkin: document.getElementById('modalCheckin').value,
-                checkout: document.getElementById('modalCheckout').value,
-                nome: document.getElementById('nomeCompleto').value,
-                email: document.getElementById('email').value,
-                telefone: document.getElementById('telefone').value,
-                mensagem: document.getElementById('mensagem').value,
-                site: "TarrafalAccomodations",
-                developer: "Leonardo Nardy",
-                ano: 2025
-            };
-
-            // Validar campos obrigatórios
-            if (!dadosReserva.nome || !dadosReserva.email || !dadosReserva.telefone) {
-                alert('Por favor, preencha todos os campos obrigatórios (*)');
-                return;
-            }
-
-            // Enviar para WhatsApp
-            enviarParaWhatsApp(dadosReserva);
-            
-            // Fechar modal
-            fecharModal();
-            
-            // Mostrar mensagem de confirmação
-            alert('Abrindo WhatsApp para confirmar a sua reserva...');
-        }
-
-        // Event Listeners
+        // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            // Configurar datas mínimas para 2025
-            const hoje = new Date('2025-01-01').toISOString().split('T')[0];
+            // Configurar datas
+            const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('checkin').min = hoje;
-            document.getElementById('modalCheckin').min = hoje;
+            
+            const amanha = new Date();
+            amanha.setDate(amanha.getDate() + 1);
+            document.getElementById('checkout').min = amanha.toISOString().split('T')[0];
 
-            // Adicionar listeners para verificar campos
-            document.getElementById('checkin').addEventListener('change', verificarCampos);
-            document.getElementById('checkout').addEventListener('change', verificarCampos);
-            document.getElementById('adultos').addEventListener('change', verificarCampos);
-            document.getElementById('criancas').addEventListener('change', verificarCampos);
-        });
-
-        // Event Listeners para galeria
-        closeGaleria.addEventListener('click', fecharGaleria);
-        galeriaPrev.addEventListener('click', imagemAnterior);
-        galeriaNext.addEventListener('click', proximaImagem);
-
-        // Event Listener para o menu Hotéis
-        menuHoteis.addEventListener('click', function(e) {
-            e.preventDefault();
-            mostrarTodosHoteis();
-        });
-
-        // Navegação por teclado na galeria
-        document.addEventListener('keydown', (e) => {
-            if (galeriaModal.style.display === 'flex') {
-                if (e.key === 'Escape') fecharGaleria();
-                if (e.key === 'ArrowLeft') imagemAnterior();
-                if (e.key === 'ArrowRight') proximaImagem();
-            }
-        });
-
-        searchForm.addEventListener('submit', processarBusca);
-        reservaForm.addEventListener('submit', processarReserva);
-        closeModal.addEventListener('click', fecharModal);
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-        // Fechar modal clicando fora
-        window.addEventListener('click', (e) => {
-            if (e.target === reservaModal) {
-                fecharModal();
-            }
-            if (e.target === galeriaModal) {
-                fecharGaleria();
-            }
-        });
-
-        // Fechar menu mobile ao clicar num link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
-
-        // Atualizar data mínima do checkout quando checkin mudar
-        document.getElementById('checkin').addEventListener('change', function() {
-            document.getElementById('checkout').min = this.value;
-            document.getElementById('modalCheckin').value = this.value;
-        });
-
-        document.getElementById('modalCheckin').addEventListener('change', function() {
-            document.getElementById('modalCheckout').min = this.value;
+            // Carregar hotéis
+            carregarTodosHoteis();
         });
     </script>
 </body>
