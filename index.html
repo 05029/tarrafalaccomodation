@@ -15,13 +15,16 @@
         }
 
         :root {
-            --primary-color: #2c5530;
-            --secondary-color: #f8b500;
-            --accent-color: #3498db;
-            --text-color: #333;
-            --light-bg: #f9f9f9;
+            /* TEMA EXPEDIA - Cores Profissionais */
+            --primary-color: #1a6dfc;
+            --secondary-color: #00a650;
+            --accent-color: #ff7e00;
+            --text-color: #2d2d2d;
+            --light-bg: #f5f5f5;
             --white: #ffffff;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --border-color: #e0e0e0;
+            --gray-text: #6b6b6b;
         }
 
         body {
@@ -86,6 +89,7 @@
             transition: all 0.3s ease;
             white-space: nowrap;
             pointer-events: none;
+            border: 1px solid var(--border-color);
         }
 
         .whatsapp-btn:hover .whatsapp-tooltip {
@@ -105,10 +109,9 @@
             }
         }
 
-        /* Resto do CSS permanece exatamente igual */
         /* Header e Navegação */
         header {
-            background: linear-gradient(135deg, var(--primary-color), #1e3a23);
+            background: linear-gradient(135deg, var(--primary-color), #0d4fbf);
             color: var(--white);
             padding: 1rem 0;
             position: fixed;
@@ -136,7 +139,7 @@
 
         .logo i {
             margin-right: 0.5rem;
-            color: var(--secondary-color);
+            color: var(--white);
         }
 
         .nav-menu {
@@ -150,10 +153,11 @@
             text-decoration: none;
             transition: color 0.3s;
             cursor: pointer;
+            font-weight: 500;
         }
 
         .nav-menu a:hover {
-            color: var(--secondary-color);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .mobile-menu-btn {
@@ -168,7 +172,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%232c5530" width="1200" height="800"/><circle fill="%23f8b500" cx="200" cy="200" r="50"/><circle fill="%233498db" cx="800" cy="300" r="80"/></svg>');
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a6dfc" width="1200" height="800"/><circle fill="%2300a650" cx="200" cy="200" r="50"/><circle fill="%23ff7e00" cx="800" cy="300" r="80"/></svg>');
             background-size: cover;
             background-position: center;
             height: 70vh;
@@ -202,6 +206,7 @@
             margin: -50px auto 2rem;
             position: relative;
             z-index: 100;
+            border: 1px solid var(--border-color);
         }
 
         .form-grid {
@@ -216,18 +221,27 @@
         }
 
         .form-group label {
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
         }
 
         .form-group input,
         .form-group select {
             padding: 0.75rem;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(26, 109, 252, 0.1);
         }
 
         .form-group input:invalid,
@@ -237,7 +251,7 @@
 
         .form-group input:valid,
         .form-group select:valid {
-            border-color: #51cf66;
+            border-color: var(--secondary-color);
         }
 
         .search-btn {
@@ -247,20 +261,21 @@
             padding: 0.75rem 2rem;
             border-radius: 5px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: not-allowed;
             transition: all 0.3s;
             align-self: end;
         }
 
         .search-btn.active {
-            background: var(--secondary-color);
+            background: var(--primary-color);
             color: var(--white);
             cursor: pointer;
         }
 
         .search-btn.active:hover {
-            background: #e6a400;
+            background: #0d4fbf;
+            transform: translateY(-1px);
         }
 
         /* Quartos Section */
@@ -273,16 +288,19 @@
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--primary-color);
+            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 700;
         }
 
         .results-info {
             text-align: center;
             margin-bottom: 2rem;
-            padding: 1rem;
+            padding: 1.5rem;
             background: var(--white);
             border-radius: 10px;
             box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
         .quartos-grid {
@@ -296,14 +314,16 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.6s ease forwards;
+            border: 1px solid var(--border-color);
         }
 
         .quarto-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         .quarto-img {
@@ -329,12 +349,12 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: var(--secondary-color);
+            background: var(--accent-color);
             color: var(--white);
-            padding: 0.25rem 0.5rem;
-            border-radius: 15px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .quarto-info {
@@ -342,8 +362,16 @@
         }
 
         .quarto-info h3 {
-            color: var(--primary-color);
+            color: var(--text-color);
             margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .quarto-info p {
+            color: var(--gray-text);
+            margin-bottom: 1rem;
+            line-height: 1.5;
         }
 
         .quarto-preco {
@@ -362,11 +390,12 @@
             padding: 0.25rem 0;
             display: flex;
             align-items: center;
+            color: var(--gray-text);
         }
 
         .quarto-features li::before {
             content: "✓";
-            color: var(--primary-color);
+            color: var(--secondary-color);
             font-weight: bold;
             margin-right: 0.5rem;
         }
@@ -380,12 +409,12 @@
             cursor: pointer;
             width: 100%;
             font-size: 1rem;
-            transition: background 0.3s;
-            font-weight: bold;
+            transition: all 0.3s;
+            font-weight: 600;
         }
 
         .pedir-reserva-btn:hover {
-            background: #1e3a23;
+            background: #0d4fbf;
             transform: translateY(-2px);
         }
 
@@ -423,7 +452,7 @@
             position: absolute;
             top: -40px;
             right: -40px;
-            background: var(--secondary-color);
+            background: var(--accent-color);
             color: var(--white);
             border: none;
             width: 40px;
@@ -438,7 +467,7 @@
         }
 
         .close-galeria:hover {
-            background: #e6a400;
+            background: #e66d00;
         }
 
         .galeria-nav {
@@ -505,6 +534,8 @@
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
         .modal-header {
@@ -512,8 +543,13 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--light-bg);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+            color: var(--text-color);
+            font-weight: 600;
         }
 
         .close-modal {
@@ -521,6 +557,11 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--gray-text);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
             color: var(--text-color);
         }
 
@@ -531,7 +572,7 @@
             border-radius: 5px;
             margin-top: 1rem;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         /* Footer */
@@ -553,7 +594,8 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
-            color: var(--secondary-color);
+            color: var(--white);
+            font-weight: 600;
         }
 
         .developer-info {
@@ -568,7 +610,7 @@
             text-align: center;
             margin-top: 2rem;
             padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.2);
         }
 
         /* Animações */
@@ -732,7 +774,6 @@
         </nav>
     </header>
 
-    <!-- Resto do código HTML permanece exatamente igual -->
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-content">
