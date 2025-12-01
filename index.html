@@ -25,20 +25,25 @@
             --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             --border-color: #e0e0e0;
             --gray-text: #6b6b6b;
+            --footer-dark: #0d4fbf;
+            --footer-light: #1a6dfc;
         }
 
         body {
             background-color: var(--light-bg);
             color: var(--text-color);
             line-height: 1.6;
+            position: relative;
         }
 
-        /* Botão WhatsApp Flutuante */
+        /* =========================================== */
+        /* BOTÃO WHATSAPP FLUTUANTE (Z-INDEX CORRIGIDO) */
+        /* =========================================== */
         .whatsapp-float {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            z-index: 1000;
+            z-index: 9999;
         }
 
         .whatsapp-btn {
@@ -55,6 +60,8 @@
             text-decoration: none;
             border: none;
             cursor: pointer;
+            position: relative;
+            z-index: 10000;
         }
 
         .whatsapp-btn:hover {
@@ -90,6 +97,7 @@
             white-space: nowrap;
             pointer-events: none;
             border: 1px solid var(--border-color);
+            z-index: 10001;
         }
 
         .whatsapp-btn:hover .whatsapp-tooltip {
@@ -109,16 +117,68 @@
             }
         }
 
-        /* Header e Navegação */
+        /* =========================================== */
+        /* BOTÃO VOLTAR AO TOPO (Z-INDEX AJUSTADO) */
+        /* =========================================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            z-index: 9998;
+            box-shadow: 0 4px 15px rgba(255, 126, 0, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: #ff9a3d;
+            box-shadow: 0 8px 25px rgba(255, 126, 0, 0.6);
+        }
+
+        .back-to-top i {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-top:hover i {
+            transform: translateY(-3px);
+        }
+
+        /* =========================================== */
+        /* HEADER E MENU MODERNO COM MOTION DESIGN */
+        /* =========================================== */
         header {
             background: linear-gradient(135deg, var(--primary-color), #0d4fbf);
             color: var(--white);
-            padding: 1rem 0;
+            padding: 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, 
+                rgba(26, 109, 252, 0.95), 
+                rgba(13, 79, 191, 0.95));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -128,6 +188,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            height: 70px;
         }
 
         .logo {
@@ -135,38 +196,223 @@
             font-weight: bold;
             display: flex;
             align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .logo i {
-            margin-right: 0.5rem;
+            font-size: 1.8rem;
             color: var(--white);
+            transition: transform 0.5s ease;
         }
 
+        .logo:hover i {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo span {
+            background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* MENU PRINCIPAL - EFEITOS MODERNOS */
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0;
         }
 
-        .nav-menu a {
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
             color: var(--white);
             text-decoration: none;
-            transition: color 0.3s;
-            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            border: 1px solid transparent;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
         }
 
-        .nav-menu a:hover {
-            color: rgba(255, 255, 255, 0.8);
+        .nav-link i {
+            font-size: 1.1rem;
+            transition: transform 0.4s ease;
         }
 
+        /* Efeito de brilho no fundo */
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        /* Efeito de onda no hover */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: transform 0.6s, opacity 0.4s;
+        }
+
+        .nav-link:hover::after {
+            transform: translate(-50%, -50%) scale(10);
+            opacity: 0;
+        }
+
+        /* Estados do link */
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link:hover i {
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-color), #ff9a3d);
+            box-shadow: 0 4px 20px rgba(255, 126, 0, 0.4);
+            transform: translateY(-2px);
+            border: none;
+        }
+
+        .nav-link.active i {
+            animation: iconPulse 2s infinite;
+        }
+
+        /* Linha animada embaixo do item ativo */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 3px;
+            transform: translateX(-50%);
+            transition: width 0.4s ease;
+        }
+
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 80%;
+        }
+
+        /* Indicador de página atual (bolinha animada) */
+        .active-indicator {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: pulseIndicator 2s infinite;
+            display: none;
+        }
+
+        .nav-item.active .active-indicator {
+            display: block;
+        }
+
+        /* Menu Mobile Button - Estilo Modernizado */
         .mobile-menu-btn {
             display: none;
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--white);
             font-size: 1.5rem;
             cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-menu-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .mobile-menu-btn:hover::before {
+            left: 100%;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Hero Section */
@@ -181,7 +427,7 @@
             justify-content: center;
             text-align: center;
             color: var(--white);
-            margin-top: 60px;
+            margin-top: 70px;
         }
 
         .hero-content h1 {
@@ -196,14 +442,16 @@
             animation: fadeInUp 1s ease 0.2s both;
         }
 
-        /* NOVO FORMULÁRIO SIMPLES ESTILO EXPEDIA */
+        /* =========================================== */
+        /* FORMULÁRIO MODIFICADO - SEM BOTÃO BUSCAR */
+        /* =========================================== */
         .search-form-expedia {
             background: var(--white);
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             max-width: 900px;
-            margin: -50px auto 2rem;
+            margin: -50px auto 4rem;
             position: relative;
             z-index: 100;
             border: 1px solid var(--border-color);
@@ -211,7 +459,7 @@
 
         .search-fields {
             display: grid;
-            grid-template-columns: 2fr 2fr 2fr 1fr;
+            grid-template-columns: repeat(3, 1fr); /* AGORA SÓ 3 COLUNAS */
             gap: 1rem;
             align-items: end;
         }
@@ -259,305 +507,416 @@
             box-shadow: 0 0 0 3px rgba(26, 109, 252, 0.1);
         }
 
-        .search-main-btn {
-            background: var(--primary-color);
+        /* =========================================== */
+        /* BOTÃO ENVIAR REQUISIÇÃO */
+        /* =========================================== */
+        .requisicao-container {
+            margin-top: 2rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .enviar-requisicao-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #00cc66);
             color: var(--white);
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            height: fit-content;
-        }
-
-        .search-main-btn:hover {
-            background: #0d4fbf;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 109, 252, 0.3);
-        }
-
-        /* Seção Localização */
-        .localizacao-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .localizacao-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .localizacao-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-        }
-
-        .localizacao-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .localizacao-img {
-            width: 100%;
-            height: 160px;
+            gap: 1rem;
+            min-width: 250px;
+            box-shadow: 0 6px 20px rgba(0, 166, 80, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .localizacao-img img {
+        .enviar-requisicao-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.6s;
+        }
+
+        .enviar-requisicao-btn:hover::before {
+            left: 100%;
+        }
+
+        .enviar-requisicao-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 166, 80, 0.5);
+            background: linear-gradient(135deg, #00cc66, var(--secondary-color));
+        }
+
+        .enviar-requisicao-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 166, 80, 0.4);
+        }
+
+        .enviar-requisicao-btn i {
+            font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
 
-        .localizacao-card:hover .localizacao-img img {
-            transform: scale(1.05);
+        .enviar-requisicao-btn:hover i {
+            transform: translateX(5px) scale(1.1);
         }
 
-        .localizacao-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
-        }
-
-        .localizacao-content {
-            padding: 1.5rem;
-        }
-
-        .localizacao-content h3 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .localizacao-content p {
+        .requisicao-info {
+            margin-top: 1rem;
             color: var(--gray-text);
             font-size: 0.9rem;
-            line-height: 1.4;
+            font-style: italic;
         }
 
-        .localizacao-btn {
-            background: var(--primary-color);
+        /* =========================================== */
+        /* FOOTER PREMIUM - DESIGN MODERNO */
+        /* =========================================== */
+        .footer-premium {
+            background: linear-gradient(135deg, var(--footer-dark), var(--footer-light));
             color: var(--white);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
-            width: 100%;
-        }
-
-        .localizacao-btn:hover {
-            background: #0d4fbf;
-        }
-
-        /* Seção Nossos Hotéis Parceiros */
-        .hoteis-parceiros-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--text-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        .hoteis-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .hotel-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .hotel-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .hotel-img {
-            width: 100%;
-            height: 200px;
+            padding: 4rem 0 0;
+            margin-top: 6rem;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
+            z-index: 1;
         }
 
-        .hotel-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .hotel-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .hotel-status {
+        /* Onda animada no topo do footer */
+        .footer-wave {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--accent-color);
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .hotel-info {
-            padding: 1.5rem;
-        }
-
-        .hotel-info h3 {
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .hotel-info p {
-            color: var(--gray-text);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .hotel-localizacao {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .hotel-localizacao::before {
-            content: "📍";
-        }
-
-        .hotel-capacidade {
-            color: var(--gray-text);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .hotel-preco {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin: 1rem 0;
-        }
-
-        .hotel-features {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .hotel-features li {
-            padding: 0.25rem 0;
-            display: flex;
-            align-items: center;
-            color: var(--gray-text);
-        }
-
-        .hotel-features li::before {
-            content: "✓";
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .hotel-reserva-btn {
-            background: var(--primary-color);
-            color: var(--white);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
+            top: -100px;
+            left: 0;
             width: 100%;
-            font-size: 1rem;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .hotel-reserva-btn:hover {
-            background: #0d4fbf;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-            margin-top: 4rem;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%230d4fbf'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            animation: waveAnimation 20s linear infinite;
+            z-index: 1;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
-        .footer-section h3 {
-            margin-bottom: 1rem;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: 0.6s;
+        }
+
+        .footer-section:hover::before {
+            left: 100%;
+        }
+
+        .footer-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-title i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section:hover .footer-title i {
+            transform: rotate(15deg) scale(1.1);
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .footer-title h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .footer-links li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links li:hover::before {
+            transform: translateX(5px);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
             color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            font-size: 0.9rem;
+            width: 20px;
+        }
+
+        /* Informação do desenvolvedor premium */
+        .developer-card {
+            background: linear-gradient(135deg, rgba(255, 126, 0, 0.1), rgba(255, 126, 0, 0.05));
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 126, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .developer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-color), transparent);
+        }
+
+        .developer-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .developer-card h4 i {
+            font-size: 1.2rem;
+        }
+
+        .developer-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Seção de redes sociais */
+        .social-section {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .social-title {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
         }
 
-        .developer-info {
-            background: rgba(0,0,0,0.2);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .social-icon:hover::before {
+            left: 100%;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon i {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover i {
+            transform: scale(1.2);
+        }
+
+        /* WhatsApp */
+        .social-icon.whatsapp:hover {
+            background: #25D366;
+        }
+
+        /* LinkedIn */
+        .social-icon.linkedin:hover {
+            background: #0077B5;
+        }
+
+        /* Email */
+        .social-icon.email:hover {
+            background: #D44638;
+        }
+
+        /* Instagram */
+        .social-icon.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5B51D8, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        /* Footer bottom */
         .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem 0;
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 1;
         }
 
-        /* Animações */
+        .footer-bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo i {
+            font-size: 2.5rem;
+            color: var(--white);
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        .footer-logo span {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .copyright a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .copyright a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* =========================================== */
+        /* ANIMAÇÕES ESPECIAIS */
+        /* =========================================== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -569,25 +928,100 @@
             }
         }
 
-        /* Responsividade */
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes pulseIndicator {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 126, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 126, 0, 0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes waveAnimation {
+            0% {
+                background-position-x: 0;
+            }
+            100% {
+                background-position-x: 1200px;
+            }
+        }
+
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* =========================================== */
+        /* RESPONSIVIDADE */
+        /* =========================================== */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 70px;
                 left: 0;
                 width: 100%;
-                background: var(--primary-color);
+                background: linear-gradient(135deg, rgba(26, 109, 252, 0.98), rgba(13, 79, 191, 0.98));
                 flex-direction: column;
-                padding: 1rem 0;
+                padding: 1rem;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                animation: slideInDown 0.3s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             .nav-menu.active {
                 display: flex;
             }
 
+            .nav-item {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .nav-link {
+                padding: 1rem;
+                justify-content: center;
+                border-radius: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-link:hover {
+                background: rgba(255, 255, 255, 0.15);
+                transform: translateX(10px);
+            }
+
+            .nav-item::after {
+                display: none;
+            }
+
             .mobile-menu-btn {
-                display: block;
+                display: flex;
             }
 
             .hero-content h1 {
@@ -604,21 +1038,6 @@
                 gap: 1rem;
             }
 
-            .localizacao-section,
-            .hoteis-parceiros-section {
-                margin: 2rem auto;
-                padding: 0 1rem;
-            }
-
-            .localizacao-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-            }
-
-            .hoteis-grid {
-                grid-template-columns: 1fr;
-            }
-
             .whatsapp-btn {
                 width: 55px;
                 height: 55px;
@@ -631,11 +1050,56 @@
             .whatsapp-tooltip {
                 display: none;
             }
+
+            .back-to-top {
+                bottom: 90px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            /* Footer responsivo */
+            .footer-premium {
+                padding: 3rem 0 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-section {
+                padding: 1.5rem;
+            }
+
+            .social-icons {
+                gap: 1rem;
+            }
+
+            .social-icon {
+                width: 45px;
+                height: 45px;
+            }
+
+            .footer-logo span {
+                font-size: 1.5rem;
+            }
+
+            /* Botão Enviar Requisição responsivo */
+            .enviar-requisicao-btn {
+                min-width: 200px;
+                padding: 0.9rem 1.8rem;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
             .nav-container {
                 padding: 0 1rem;
+            }
+
+            .logo span {
+                font-size: 1.2rem;
             }
 
             .hero {
@@ -646,12 +1110,9 @@
                 font-size: 1.5rem;
             }
 
-            .localizacao-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hotel-card {
-                margin: 0 0.5rem;
+            .nav-link {
+                padding: 0.8rem;
+                font-size: 0.9rem;
             }
 
             .whatsapp-float {
@@ -666,6 +1127,64 @@
 
             .whatsapp-btn i {
                 font-size: 24px;
+            }
+
+            .back-to-top {
+                bottom: 80px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .footer-content {
+                padding: 0 1rem;
+            }
+
+            .footer-section {
+                padding: 1.25rem;
+            }
+
+            .social-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .social-icon i {
+                font-size: 1.1rem;
+            }
+
+            .footer-logo {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer-logo span {
+                font-size: 1.3rem;
+            }
+
+            /* Botão Enviar Requisição mobile pequeno */
+            .enviar-requisicao-btn {
+                min-width: 100%;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-item:nth-child(1) .nav-link { animation-delay: 0.1s; }
+            .nav-item:nth-child(2) .nav-link { animation-delay: 0.2s; }
+            .nav-item:nth-child(3) .nav-link { animation-delay: 0.3s; }
+            
+            .nav-link {
+                animation: fadeInUp 0.5s ease backwards;
+            }
+
+            .footer-section:nth-child(1) { animation-delay: 0.1s; }
+            .footer-section:nth-child(2) { animation-delay: 0.2s; }
+            .footer-section:nth-child(3) { animation-delay: 0.3s; }
+            
+            .footer-section {
+                animation: fadeInUp 0.6s ease backwards;
             }
         }
     </style>
@@ -682,6 +1201,11 @@
         </a>
     </div>
 
+    <!-- Botão Voltar ao Topo -->
+    <a href="#inicio" class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <!-- Header -->
     <header>
         <nav class="nav-container">
@@ -689,13 +1213,31 @@
                 <i>🏝️</i>
                 <span>TarrafalAccomodations</span>
             </div>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn" aria-label="Menu de navegação">
+                <span>☰</span>
+            </button>
             <ul class="nav-menu">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#localizacao" id="menuLocalizacao">Localizações</a></li>
-                <li><a href="#hoteis-parceiros" id="menuHoteis">Hotéis</a></li>
-                <li><a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank">Sobre</a></li>
-                <li><a href="#contactos">Contactos</a></li>
+                <li class="nav-item" data-section="inicio">
+                    <a href="#inicio" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Início</span>
+                    </a>
+                    <div class="active-indicator"></div>
+                </li>
+                <li class="nav-item" data-section="sobre">
+                    <a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" class="nav-link" target="_blank">
+                        <i class="fas fa-user"></i>
+                        <span>Sobre</span>
+                    </a>
+                    <div class="active-indicator"></div>
+                </li>
+                <li class="nav-item" data-section="contactos">
+                    <a href="#contactos" class="nav-link">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Contactos</span>
+                    </a>
+                    <div class="active-indicator"></div>
+                </li>
             </ul>
         </nav>
     </header>
@@ -708,7 +1250,7 @@
         </div>
     </section>
 
-    <!-- NOVO FORMULÁRIO SIMPLES ESTILO EXPEDIA -->
+    <!-- FORMULÁRIO MODIFICADO SEM BOTÃO BUSCAR -->
     <form class="search-form-expedia" id="searchForm">
         <div class="search-fields">
             <!-- Destino Fixo -->
@@ -737,12 +1279,6 @@
                     <input type="date" id="checkout" required>
                 </div>
             </div>
-
-            <!-- Botão de Busca -->
-            <button type="submit" class="search-main-btn">
-                <i class="fas fa-search"></i>
-                Buscar
-            </button>
         </div>
 
         <!-- Linha adicional para Viajantes -->
@@ -756,6 +1292,8 @@
                     <option value="2" selected>2 Adultos</option>
                     <option value="3">3 Adultos</option>
                     <option value="4">4 Adultos</option>
+                    <option value="5">5 Adultos</option>
+                    <option value="6">6 Adultos</option>
                 </select>
             </div>
 
@@ -766,6 +1304,8 @@
                     <option value="0" selected>0 Crianças</option>
                     <option value="1">1 Criança</option>
                     <option value="2">2 Crianças</option>
+                    <option value="3">3 Crianças</option>
+                    <option value="4">4 Crianças</option>
                 </select>
             </div>
 
@@ -776,268 +1316,484 @@
                     <option value="1" selected>1 Quarto</option>
                     <option value="2">2 Quartos</option>
                     <option value="3">3 Quartos</option>
+                    <option value="4">4 Quartos</option>
                 </select>
             </div>
+        </div>
 
-            <!-- Espaço vazio para alinhar -->
-            <div></div>
+        <!-- BOTÃO ENVIAR REQUISIÇÃO -->
+        <div class="requisicao-container">
+            <button type="button" class="enviar-requisicao-btn" id="enviarRequisicaoBtn">
+                <i class="fas fa-paper-plane"></i>
+                Enviar Requisição
+            </button>
+            <div class="requisicao-info">
+                Clique para enviar sua requisição diretamente para o nosso WhatsApp
+            </div>
         </div>
     </form>
 
-    <!-- SEÇÃO: Reserve Perto de onde quiser (RESTAURADA) -->
-    <section class="localizacao-section" id="localizacao">
-        <h2 class="section-title">Reserve Perto de onde quiser</h2>
-        <div class="localizacao-grid">
-            <!-- Pôr do Mar -->
-            <div class="localizacao-card" data-categoria="por-do-mar">
-                <div class="localizacao-img">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Pôr do Mar">
-                    <div class="localizacao-overlay"></div>
-                </div>
-                <div class="localizacao-content">
-                    <h3>Pôr do Mar</h3>
-                    <p>Acomodações com vistas espetaculares para o pôr do sol no oceano</p>
-                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('por-do-mar')">Ver Hotéis</button>
-                </div>
-            </div>
-
-            <!-- Centro -->
-            <div class="localizacao-card" data-categoria="centro">
-                <div class="localizacao-img">
-                    <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop" alt="Centro da Cidade">
-                    <div class="localizacao-overlay"></div>
-                </div>
-                <div class="localizacao-content">
-                    <h3>Centro</h3>
-                    <p>Hotéis no coração da cidade, perto de restaurantes e comércio</p>
-                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('centro')">Ver Hotéis</button>
-                </div>
-            </div>
-
-            <!-- Zona de Transporte -->
-            <div class="localizacao-card" data-categoria="transporte">
-                <div class="localizacao-img">
-                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop" alt="Zona de Transporte">
-                    <div class="localizacao-overlay"></div>
-                </div>
-                <div class="localizacao-content">
-                    <h3>Zona de Transporte</h3>
-                    <p>Acesso fácil a terminais de transporte e principais vias</p>
-                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('transporte')">Ver Hotéis</button>
-                </div>
-            </div>
-
-            <!-- Localidade -->
-            <div class="localizacao-card" data-categoria="localidade">
-                <div class="localizacao-img">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop" alt="Localidade">
-                    <div class="localizacao-overlay"></div>
-                </div>
-                <div class="localizacao-content">
-                    <h3>Localidade</h3>
-                    <p>Imersão na cultura local e comunidades autênticas</p>
-                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('localidade')">Ver Hotéis</button>
-                </div>
-            </div>
-
-            <!-- Montanha -->
-            <div class="localizacao-card" data-categoria="montanha">
-                <div class="localizacao-img">
-                    <img src="https://images.unsplash.com/photo-1464822759849-e30de63b6a44?w=400&h=300&fit=crop" alt="Montanha">
-                    <div class="localizacao-overlay"></div>
-                </div>
-                <div class="localizacao-content">
-                    <h3>Montanha</h3>
-                    <p>Acomodações serranas com ar puro e natureza preservada</p>
-                    <button class="localizacao-btn" onclick="filtrarPorLocalizacao('montanha')">Ver Hotéis</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO: Nossos Hotéis Parceiros (RESTAURADA) -->
-    <section class="hoteis-parceiros-section" id="hoteis-parceiros">
-        <h2 class="section-title">Nossos Hotéis Parceiros</h2>
-        <div class="hoteis-grid" id="hoteisGrid">
-            <!-- Os hotéis serão carregados automaticamente via JavaScript -->
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contactos">
+    <!-- FOOTER PREMIUM -->
+    <footer class="footer-premium" id="contactos">
+        <div class="footer-wave"></div>
+        
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>TarrafalAccomodations</h3>
-                <p>Sua casa longe de casa no coração do Tarrafal, Cabo Verde.</p>
-                <div class="developer-info">
-                    <p><strong>Site desenvolvido por:</strong></p>
-                    <p>Leonardo Nardy</p>
-                    <p>© 2025 - Todos os direitos reservados</p>
+            <div class="footer-grid">
+                <!-- Sobre Nós -->
+                <div class="footer-section">
+                    <div class="footer-title">
+                        <i class="fas fa-island-tropical"></i>
+                        <h3>Sobre TarrafalAccomodations</h3>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 1.5rem; line-height: 1.6;">
+                        Sua casa longe de casa no coração do Tarrafal, Cabo Verde. Oferecemos as melhores acomodações com vista para a mais bela praia do arquipélago.
+                    </p>
+                    
+                    <div class="developer-card">
+                        <h4><i class="fas fa-code"></i> Desenvolvimento</h4>
+                        <p>Site desenvolvido por <strong>Leonardo Nardy</strong> com paixão por Cabo Verde e excelência em design web.</p>
+                    </div>
+                </div>
+
+                <!-- Contactos -->
+                <div class="footer-section">
+                    <div class="footer-title">
+                        <i class="fas fa-address-book"></i>
+                        <h3>Contactos</h3>
+                    </div>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="mailto:leonardonardysc@gmail.com">
+                                <i class="fas fa-envelope"></i>
+                                <span>leonardonardysc@gmail.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+2389177161">
+                                <i class="fas fa-phone"></i>
+                                <span>+238 917 71 61</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://maps.google.com/?q=Tarrafal,Santiago,CaboVerde" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Tarrafal, Ilha de Santiago, Cabo Verde</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/2389177161" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp: +238 917 71 61</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="footer-section">
+                    <div class="footer-title">
+                        <i class="fas fa-link"></i>
+                        <h3>Links Rápidos</h3>
+                    </div>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#inicio">
+                                <i class="fas fa-home"></i>
+                                <span>Página Inicial</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Sobre o Desenvolvedor</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contactos">
+                                <i class="fas fa-headset"></i>
+                                <span>Suporte & Contacto</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="scrollToTop()">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>Voltar ao Topo</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-section">
-                <h3>Contactos</h3>
-                <p><strong>Email:</strong> leonardonardysc@gmail.com</p>
-                <p><strong>Telefone:</strong> +238 917 71 61</p>
-                <p><strong>Localização:</strong> Tarrafal, Ilha de Santiago, Cabo Verde</p>
-            </div>
-            <div class="footer-section">
-                <h3>Links Rápidos</h3>
-                <p><a href="#inicio" style="color: white;">Início</a></p>
-                <p><a href="#localizacao" style="color: white;">Localizações</a></p>
-                <p><a href="#hoteis-parceiros" style="color: white;">Hotéis</a></p>
-                <p><a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank" style="color: white;">Sobre</a></p>
-                <p><a href="#contactos" style="color: white;">Contactos</a></p>
+
+            <!-- Redes Sociais -->
+            <div class="social-section">
+                <div class="social-title">Conecte-se Conosco</div>
+                <div class="social-icons">
+                    <a href="https://wa.me/2389177161" class="social-icon whatsapp" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" class="social-icon linkedin" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:leonardonardysc@gmail.com" class="social-icon email" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="social-icon instagram" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
         </div>
+
+        <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>&copy; 2025 TarrafalAccomodations. Desenvolvido por Leonardo Nardy. Todos os direitos reservados.</p>
+            <div class="footer-bottom-content">
+                <div class="footer-logo">
+                    <i>🏝️</i>
+                    <span>TarrafalAccomodations</span>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 <strong>TarrafalAccomodations</strong>. Todos os direitos reservados.</p>
+                    <p>Desenvolvido por <a href="https://cv.linkedin.com/in/leonardo-de-sousa-27ab3223a" target="_blank">Leonardo Nardy</a> com ❤️ para Cabo Verde.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: rgba(255, 255, 255, 0.6);">
+                        Este site é protegido pelas leis de direitos autorais. Conteúdo e design são propriedade intelectual.
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Dados dos hotéis
-        const hoteis = [
-            {
-                id: 1,
-                nome: "Hotel Village Penareia",
-                preco: 22000,
-                imagens: [
-                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=500&h=300&fit=crop"
-                ],
-                descricao: "Complexo hoteleiro com piscina e vista deslumbrante para o mar",
-                comodidades: ["Piscina", "Wi-Fi Gratuito", "Ar Condicionado", "Restaurante", "Estacionamento", "Serviço de Quarto"],
-                capacidade: 4,
-                localizacao: "Praia do Tarrafal",
-                classificacao: "⭐⭐⭐⭐",
-                categoria: "por-do-mar"
-            },
-            {
-                id: 2,
-                nome: "Bongalo Buzio Relax",
-                preco: 15000,
-                imagens: [
-                    "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=500&h=300&fit=crop"
-                ],
-                descricao: "Bungalows rústicos à beira-mar com ambiente relaxante",
-                comodidades: ["Vista para o Mar", "Varanda Privada", "Cozinha Equipada", "Rede", "Churrasqueira", "Wi-Fi"],
-                capacidade: 3,
-                localizacao: "Baía do Tarrafal",
-                classificacao: "⭐⭐⭐",
-                categoria: "por-do-mar"
-            },
-            {
-                id: 3,
-                nome: "Quinta Refugio",
-                preco: 18000,
-                imagens: [
-                    "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=300&fit=crop"
-                ],
-                descricao: "Quinta tranquila com jardins exuberantes e atmosfera familiar",
-                comodidades: ["Jardim", "Piscina Natural", "Café da Manhã Incluído", "Estacionamento", "Área de Churrasco", "Wi-Fi"],
-                capacidade: 6,
-                localizacao: "Serra do Tarrafal",
-                classificacao: "⭐⭐⭐⭐",
-                categoria: "montanha"
-            },
-            {
-                id: 4,
-                nome: "Casa Socesso",
-                preco: 12000,
-                imagens: [
-                    "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=300&fit=crop"
-                ],
-                descricao: "Casa tradicional cabo-verdiana com arquitetura local autêntica",
-                comodidades: ["Cozinha Tradicional", "Pátio Interior", "Varanda", "Ventilador", "TV", "Wi-Fi"],
-                capacidade: 4,
-                localizacao: "Centro do Tarrafal",
-                classificacao: "⭐⭐⭐",
-                categoria: "centro"
-            },
-            {
-                id: 5,
-                nome: "Decor House",
-                preco: 25000,
-                imagens: [
-                    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&h=300&fit=crop"
-                ],
-                descricao: "Design moderno com decoração contemporânea e conforto premium",
-                comodidades: ["Design Interior", "Ar Condicionado", "Cozinha Moderna", "TV Smart", "Varanda Panorâmica", "Wi-Fi Rápido"],
-                capacidade: 2,
-                localizacao: "Área Nobre do Tarrafal",
-                classificacao: "⭐⭐⭐⭐⭐",
-                categoria: "localidade"
-            },
-            {
-                id: 6,
-                nome: "Villa Marisol",
-                preco: 32000,
-                imagens: [
-                    "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500&h=300&fit=crop",
-                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=300&fit=crop"
-                ],
-                descricao: "Villa exclusiva com piscina privativa e vista para o pôr do sol",
-                comodidades: ["Piscina Privativa", "3 Quartos", "Cozinha Completa", "Jardim", "Estacionamento", "Wi-Fi"],
-                capacidade: 8,
-                localizacao: "Ponta do Tarrafal",
-                classificacao: "⭐⭐⭐⭐⭐",
-                categoria: "transporte"
+        // ===========================================
+        // SISTEMA DE MENU COM MOTION DESIGN
+        // ===========================================
+        class ModernMenu {
+            constructor() {
+                this.menuItems = document.querySelectorAll('.nav-item');
+                this.navLinks = document.querySelectorAll('.nav-link');
+                this.mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+                this.navMenu = document.querySelector('.nav-menu');
+                this.currentActive = null;
+                
+                this.init();
             }
-        ];
-
-        // Carregar hotéis automaticamente
-        function carregarTodosHoteis() {
-            const hoteisGrid = document.getElementById('hoteisGrid');
-            hoteisGrid.innerHTML = '';
-
-            hoteis.forEach((hotel, index) => {
-                const hotelCard = document.createElement('div');
-                hotelCard.className = 'hotel-card';
-                hotelCard.style.animationDelay = `${index * 0.1}s`;
-                hotelCard.innerHTML = `
-                    <div class="hotel-img" data-hotel-id="${hotel.id}">
-                        <img src="${hotel.imagens[0]}" alt="${hotel.nome}" loading="lazy">
-                        <div class="hotel-status">${hotel.classificacao}</div>
-                    </div>
-                    <div class="hotel-info">
-                        <h3>${hotel.nome}</h3>
-                        <p>${hotel.descricao}</p>
-                        <div class="hotel-localizacao">${hotel.localizacao}</div>
-                        <div class="hotel-capacidade"><strong>Capacidade:</strong> ${hotel.capacidade} pessoa(s)</div>
-                        <ul class="hotel-features">
-                            ${hotel.comodidades.map(comodidade => `<li>${comodidade}</li>`).join('')}
-                        </ul>
-                        <div class="hotel-preco">${formatarPreco(hotel.preco)}/noite</div>
-                        <button class="hotel-reserva-btn" data-id="${hotel.id}">Pedir Reserva</button>
-                    </div>
+            
+            init() {
+                // Configurar eventos
+                this.setupEventListeners();
+                
+                // Detectar seção ativa inicial
+                this.detectActiveSection();
+                
+                // Configurar menu mobile
+                this.setupMobileMenu();
+                
+                // Adicionar efeito de clique nos links
+                this.setupClickEffects();
+                
+                // Adicionar efeito de scroll para mudança ativa
+                this.setupScrollDetection();
+            }
+            
+            setupEventListeners() {
+                // Efeito hover com delay para animação em cascata
+                this.menuItems.forEach((item, index) => {
+                    const link = item.querySelector('.nav-link');
+                    
+                    item.addEventListener('mouseenter', () => {
+                        // Efeito de entrada
+                        link.style.transform = 'translateY(-3px)';
+                        
+                        // Animar ícone
+                        const icon = link.querySelector('i');
+                        if (icon) {
+                            icon.style.transform = 'translateY(-2px) scale(1.1)';
+                        }
+                    });
+                    
+                    item.addEventListener('mouseleave', () => {
+                        // Só resetar se não estiver ativo
+                        if (!link.classList.contains('active')) {
+                            link.style.transform = 'translateY(0)';
+                            
+                            const icon = link.querySelector('i');
+                            if (icon) {
+                                icon.style.transform = 'translateY(0) scale(1)';
+                            }
+                        }
+                    });
+                });
+            }
+            
+            setupMobileMenu() {
+                if (this.mobileMenuBtn) {
+                    this.mobileMenuBtn.addEventListener('click', () => {
+                        this.toggleMobileMenu();
+                    });
+                    
+                    // Fechar menu ao clicar fora (mobile)
+                    document.addEventListener('click', (e) => {
+                        if (window.innerWidth <= 768) {
+                            if (!this.navMenu.contains(e.target) && 
+                                !this.mobileMenuBtn.contains(e.target) && 
+                                this.navMenu.classList.contains('active')) {
+                                this.navMenu.classList.remove('active');
+                                this.mobileMenuBtn.querySelector('span').textContent = '☰';
+                            }
+                        }
+                    });
+                }
+            }
+            
+            toggleMobileMenu() {
+                this.navMenu.classList.toggle('active');
+                const icon = this.mobileMenuBtn.querySelector('span');
+                icon.textContent = this.navMenu.classList.contains('active') ? '✕' : '☰';
+                
+                // Animação dos itens do menu mobile
+                if (this.navMenu.classList.contains('active')) {
+                    this.menuItems.forEach((item, index) => {
+                        item.style.animationDelay = `${index * 0.1}s`;
+                        item.style.animation = 'fadeInUp 0.3s ease backwards';
+                    });
+                }
+            }
+            
+            setupClickEffects() {
+                this.navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        // Se for link externo, não fazer animações
+                        if (link.hasAttribute('target') && link.getAttribute('target') === '_blank') {
+                            return;
+                        }
+                        
+                        // Prevenir comportamento padrão para links âncora
+                        if (link.getAttribute('href').startsWith('#')) {
+                            e.preventDefault();
+                            
+                            // Adicionar efeito de clique
+                            this.addClickEffect(e);
+                            
+                            // Atualizar item ativo
+                            this.setActiveItem(link);
+                            
+                            // Rolagem suave
+                            const targetId = link.getAttribute('href').substring(1);
+                            const targetElement = document.getElementById(targetId);
+                            
+                            if (targetElement) {
+                                // Fechar menu mobile se aberto
+                                if (window.innerWidth <= 768 && this.navMenu.classList.contains('active')) {
+                                    this.toggleMobileMenu();
+                                }
+                                
+                                // Rolagem suave
+                                window.scrollTo({
+                                    top: targetElement.offsetTop - 80,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }
+                    });
+                });
+            }
+            
+            addClickEffect(event) {
+                // Criar efeito de onda
+                const wave = document.createElement('span');
+                wave.className = 'click-wave';
+                wave.style.cssText = `
+                    position: fixed;
+                    width: 100px;
+                    height: 100px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    transform: translate(-50%, -50%) scale(0);
+                    animation: waveAnimation 0.6s ease-out;
+                    z-index: 1001;
                 `;
-                hoteisGrid.appendChild(hotelCard);
-            });
+                
+                // Posicionar no clique
+                wave.style.left = `${event.clientX}px`;
+                wave.style.top = `${event.clientY}px`;
+                
+                document.body.appendChild(wave);
+                
+                // Remover após animação
+                setTimeout(() => {
+                    wave.remove();
+                }, 600);
+            }
+            
+            setActiveItem(clickedLink) {
+                // Remover classe active de todos
+                this.navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    link.parentElement.classList.remove('active');
+                });
+                
+                // Adicionar ao clicado
+                clickedLink.classList.add('active');
+                clickedLink.parentElement.classList.add('active');
+                
+                // Efeito visual de confirmação
+                const icon = clickedLink.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        icon.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            }
+            
+            detectActiveSection() {
+                // Verificar URL atual
+                const currentHash = window.location.hash.substring(1) || 'inicio';
+                
+                // Definir item ativo inicial
+                this.navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === `#${currentHash}` || 
+                        (currentHash === 'inicio' && href === '#inicio')) {
+                        this.setActiveItem(link);
+                    }
+                });
+            }
+            
+            setupScrollDetection() {
+                // Atualizar item ativo baseado no scroll
+                window.addEventListener('scroll', () => {
+                    const scrollPosition = window.scrollY + 100;
+                    
+                    // Verificar cada seção
+                    const sections = ['inicio', 'contactos'];
+                    
+                    let currentSection = 'inicio';
+                    
+                    sections.forEach(section => {
+                        const element = document.getElementById(section);
+                        if (element) {
+                            if (scrollPosition >= element.offsetTop) {
+                                currentSection = section;
+                            }
+                        }
+                    });
+                    
+                    // Atualizar menu
+                    this.navLinks.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === `#${currentSection}`) {
+                            if (!link.classList.contains('active')) {
+                                this.setActiveItem(link);
+                            }
+                        }
+                    });
+                });
+            }
         }
-
-        function formatarPreco(preco) {
-            return `${preco.toLocaleString('pt-CV')} CVE`;
+        
+        // ===========================================
+        // SISTEMA DO FOOTER PREMIUM
+        // ===========================================
+        class PremiumFooter {
+            constructor() {
+                this.backToTopBtn = document.getElementById('backToTop');
+                this.footerSections = document.querySelectorAll('.footer-section');
+                this.socialIcons = document.querySelectorAll('.social-icon');
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupBackToTop();
+                this.setupFooterAnimations();
+                this.setupSocialIcons();
+                this.setupFooterHoverEffects();
+            }
+            
+            setupBackToTop() {
+                // Mostrar/ocultar botão baseado no scroll
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        this.backToTopBtn.classList.add('visible');
+                    } else {
+                        this.backToTopBtn.classList.remove('visible');
+                    }
+                });
+                
+                // Rolagem suave ao clicar
+                this.backToTopBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            setupFooterAnimations() {
+                // Animar entrada das seções do footer
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                this.footerSections.forEach(section => {
+                    observer.observe(section);
+                });
+            }
+            
+            setupSocialIcons() {
+                // Efeitos hover nas redes sociais
+                this.socialIcons.forEach(icon => {
+                    icon.addEventListener('mouseenter', () => {
+                        const iconElement = icon.querySelector('i');
+                        if (iconElement) {
+                            iconElement.style.transform = 'scale(1.2) rotate(5deg)';
+                        }
+                    });
+                    
+                    icon.addEventListener('mouseleave', () => {
+                        const iconElement = icon.querySelector('i');
+                        if (iconElement) {
+                            iconElement.style.transform = 'scale(1) rotate(0)';
+                        }
+                    });
+                });
+            }
+            
+            setupFooterHoverEffects() {
+                // Efeito de digitação no título do footer
+                const footerTitles = document.querySelectorAll('.footer-title h3');
+                footerTitles.forEach(title => {
+                    title.addEventListener('mouseenter', () => {
+                        title.style.background = 'linear-gradient(45deg, var(--accent-color), #ff9a3d)';
+                        title.style.webkitBackgroundClip = 'text';
+                        title.style.webkitTextFillColor = 'transparent';
+                    });
+                    
+                    title.addEventListener('mouseleave', () => {
+                        title.style.background = 'linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.8))';
+                        title.style.webkitBackgroundClip = 'text';
+                        title.style.webkitTextFillColor = 'transparent';
+                    });
+                });
+            }
         }
-
-        function filtrarPorLocalizacao(categoria) {
-            const hoteisFiltrados = hoteis.filter(hotel => hotel.categoria === categoria);
-            // Implementar filtragem aqui
-            alert(`Mostrando hotéis na categoria: ${categoria}`);
-        }
-
-        // Inicializar
+        
+        // ===========================================
+        // FUNCIONALIDADES EXISTENTES E NOVAS
+        // ===========================================
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar menu moderno
+            new ModernMenu();
+            
+            // Inicializar footer premium
+            new PremiumFooter();
+            
             // Configurar datas
             const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('checkin').min = hoje;
@@ -1045,9 +1801,164 @@
             const amanha = new Date();
             amanha.setDate(amanha.getDate() + 1);
             document.getElementById('checkout').min = amanha.toISOString().split('T')[0];
-
-            // Carregar hotéis
-            carregarTodosHoteis();
+            
+            // Configurar botão Enviar Requisição
+            const enviarRequisicaoBtn = document.getElementById('enviarRequisicaoBtn');
+            if (enviarRequisicaoBtn) {
+                enviarRequisicaoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Validar formulário
+                    const checkin = document.getElementById('checkin').value;
+                    const checkout = document.getElementById('checkout').value;
+                    const adultos = document.getElementById('adultos').value;
+                    const criancas = document.getElementById('criancas').value;
+                    const quartos = document.getElementById('quartos').value;
+                    
+                    // Validar campos obrigatórios
+                    if (!checkin || !checkout || !adultos || !criancas || !quartos) {
+                        alert('Por favor, preencha todos os campos obrigatórios.');
+                        return;
+                    }
+                    
+                    // Validar datas
+                    if (new Date(checkout) <= new Date(checkin)) {
+                        alert('A data de check-out deve ser posterior à data de check-in.');
+                        return;
+                    }
+                    
+                    // Formatador de datas
+                    const formatarData = (dataString) => {
+                        const data = new Date(dataString);
+                        return data.toLocaleDateString('pt-PT', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                        });
+                    };
+                    
+                    // Criar mensagem para WhatsApp
+                    const message = `*NOVA REQUISIÇÃO - TarrafalAccomodations*\n\n` +
+                                   `*📅 Datas:*\n` +
+                                   `• Check-in: ${formatarData(checkin)}\n` +
+                                   `• Check-out: ${formatarData(checkout)}\n\n` +
+                                   `*👥 Viajantes:*\n` +
+                                   `• Adultos: ${adultos}\n` +
+                                   `• Crianças: ${criancas}\n` +
+                                   `• Quartos: ${quartos}\n\n` +
+                                   `*📍 Destino:* Tarrafal, Cabo Verde\n\n` +
+                                   `*📋 Detalhes da Requisição:*\n` +
+                                   `O cliente está interessado em acomodações para as datas acima indicadas.`;
+                    
+                    // Número de WhatsApp (9 17 71 61 com código de país +238)
+                    const whatsappNumber = '2389177161';
+                    
+                    // Codificar mensagem para URL
+                    const encodedMessage = encodeURIComponent(message);
+                    
+                    // Criar URL do WhatsApp
+                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                    
+                    // Efeito visual no botão
+                    enviarRequisicaoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                    enviarRequisicaoBtn.disabled = true;
+                    
+                    // Abrir WhatsApp após breve delay para efeito visual
+                    setTimeout(() => {
+                        // Redirecionar para WhatsApp
+                        window.open(whatsappURL, '_blank');
+                        
+                        // Resetar botão após 2 segundos
+                        setTimeout(() => {
+                            enviarRequisicaoBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Requisição';
+                            enviarRequisicaoBtn.disabled = false;
+                            
+                            // Feedback visual
+                            enviarRequisicaoBtn.style.background = 'linear-gradient(135deg, var(--secondary-color), #00cc66)';
+                            enviarRequisicaoBtn.style.transform = 'translateY(0)';
+                            
+                            // Mostrar confirmação
+                            const infoDiv = document.querySelector('.requisicao-info');
+                            if (infoDiv) {
+                                const originalText = infoDiv.textContent;
+                                infoDiv.textContent = '✅ Requisição enviada com sucesso!';
+                                infoDiv.style.color = 'var(--secondary-color)';
+                                infoDiv.style.fontWeight = 'bold';
+                                
+                                setTimeout(() => {
+                                    infoDiv.textContent = originalText;
+                                    infoDiv.style.color = 'var(--gray-text)';
+                                    infoDiv.style.fontWeight = 'normal';
+                                }, 3000);
+                            }
+                        }, 2000);
+                    }, 800);
+                });
+            }
+            
+            // Função para rolar ao topo
+            window.scrollToTop = function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            };
+            
+            // Adicionar estilo para animação de onda
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes waveAnimation {
+                    to {
+                        transform: translate(-50%, -50%) scale(3);
+                        opacity: 0;
+                    }
+                }
+                
+                /* Efeito de digitação no logo */
+                @keyframes typing {
+                    from { width: 0 }
+                    to { width: 100% }
+                }
+                
+                /* Efeito de cursor piscante */
+                @keyframes blink {
+                    0%, 100% { opacity: 1 }
+                    50% { opacity: 0 }
+                }
+                
+                /* Animação de spinner */
+                @keyframes fa-spin {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+                    100% {
+                        transform: rotate(360deg);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Adicionar efeito de digitação ao logo em telas grandes
+            if (window.innerWidth > 768) {
+                const logoText = document.querySelector('.logo span');
+                if (logoText) {
+                    const originalText = logoText.textContent;
+                    logoText.textContent = '';
+                    logoText.style.display = 'inline-block';
+                    logoText.style.overflow = 'hidden';
+                    logoText.style.whiteSpace = 'nowrap';
+                    logoText.style.borderRight = '2px solid rgba(255, 255, 255, 0.7)';
+                    logoText.style.width = '0';
+                    logoText.style.animation = 'typing 1.5s steps(30, end) forwards, blink 0.8s infinite';
+                    
+                    setTimeout(() => {
+                        logoText.textContent = originalText;
+                        logoText.style.borderRight = 'none';
+                        logoText.style.animation = 'none';
+                        logoText.style.width = 'auto';
+                    }, 1600);
+                }
+            }
         });
     </script>
 </body>
